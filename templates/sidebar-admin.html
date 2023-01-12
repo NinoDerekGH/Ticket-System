@@ -1,17 +1,40 @@
 <!-- Sidebar -->
-<div class="side_bar d-flex flex-column flex-shrink-0">
-    <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
+<div class="side_bar position-absolute start-0">
 
-        <!-- Items -->
+    <!-- Upper Items -->
+    <ul class="nav nav-pills nav-flush flex-column text-center position-absolute top-0">
         <li class="nav-item">
-            <a href="#" class="nav-link py-3 border-bottom" data-bs-placement="right" data-bs-original-title="Tickets">
+            <a href="#" class="nav-link py-2 my-2" data-bs-original-title="Tickets">
                 <i class="bi bi-ticket-fill"></i>
             </a>
         </li>
 
         <li class="nav-item">
-            <a href="#" class="nav-link py-3 border-bottom" data-bs-placement="right" data-bs-original-title="Tickets">
-                <i class="bi bi-ticket-fill"></i>
+            <a href="#" class="nav-link py-2 my-2" data-bs-original-title="Agents">
+                <i class="fa-solid fa-users"></i>
+            </a>
+        </li>
+    </ul>
+
+    <!-- Lower Items -->
+    <ul class="nav nav-pills nav-flush flex-column text-center position-absolute bottom-0">
+        <li class="nav-item">
+            <a href="#" class="nav-link py-2 my-2" data-bs-original-title="Settings">
+                <i class="bi bi-gear-wide-connected"></i>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a href="#" class="nav-link py-2 my-2" data-bs-original-title="Help">
+                <i class="bi bi-question-circle-fill"></i>
+            </a>
+        </li>
+
+        <hr class="my-2 mx-auto text-center">
+
+        <li class="nav-item">
+            <a href="#" class="nav-link py-2 my-2" data-bs-original-title="User Profile">
+                <img src="{{ url_for('static', filename='images/placeholder.png') }}" alt="placeholder">
             </a>
         </li>
     </ul>

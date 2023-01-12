@@ -1,17 +1,18 @@
-body {
-    margin: auto;
-    padding: auto;
+* {
+    margin: 0;
+    padding: 0;
     font-family: Georgia, 'Times New Roman', Times, serif;
-    height: 100vh;
-    width: 100%;
-    display: flex;
+    box-sizing: border-box;
+}
 
+body {
+    height: 100vh;
 }
 
 .side_bar {
     background-color: #07575b;
-    color: #61a4ad;
-    width: 4.5rem;
+    width: 57px;
+    height: 100%;
 }
 
 .side_bar ul {
@@ -26,4 +27,21 @@ body {
     font-size: 1.25rem;
     line-height: 1.75rem;
     text-decoration: none;
+    color: #61a4ad;
+}
+
+.side_bar a:hover {
+    color: #003b46;
+}
+
+.side_bar hr {
+    width: 75%;
+    color: #61a4ad;
+    border-width: 2px;
+}
+
+.side_bar img {
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
 }
