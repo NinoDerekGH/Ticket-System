@@ -1,0 +1,29 @@
+body {
+    margin: auto;
+    padding: auto;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+
+}
+
+.side_bar {
+    background-color: #07575b;
+    color: #61a4ad;
+    width: 4.5rem;
+}
+
+.side_bar ul {
+    list-style-type: none;
+}
+
+.side_bar li:hover {
+    background-color: #c0dee5;
+}
+
+.side_bar a {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    text-decoration: none;
+}
