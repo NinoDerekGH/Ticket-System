@@ -45,3 +45,30 @@ body {
     width: 25px;
     height: 25px;
 }
+
+.side_panel {
+    background-color: #ededed;
+    width: 225px;
+    height: 100%;
+    left: 57px;
+}
+
+.side_panel span {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+}
+
+.side_panel .item_separate {
+    width: 86%;
+}
+
+.side_panel a {
+    font-size: 1.1rem;
+    line-height: 1.75rem;
+    text-decoration: none;
+    color: #003b46;
+}
+
+.side_panel a:hover {
+    color: #61a4ad;
+}
