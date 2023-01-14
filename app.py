@@ -14,5 +14,9 @@ def login():
 def register():
     return render_template('register.html')
 
+# @app.route('/user/create', methods=['POST'])
+# def create():
+    
+
 if __name__ == '__main__':
     app.run(debug=True)
