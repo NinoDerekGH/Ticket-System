@@ -6,6 +6,7 @@
 }
 
 body {
+    background-color: #ffffff;
     height: 100vh;
 }
 
@@ -13,6 +14,13 @@ body {
     background-color: #07575b;
     width: 57px;
     height: 100%;
+}
+
+.side_bar .logo {
+    font-size: 1.6rem;
+    line-height: 1.75rem;
+    text-decoration: none;
+    color: #61a4ad;
 }
 
 .side_bar ul {
@@ -26,7 +34,6 @@ body {
 .side_bar a {
     font-size: 1.25rem;
     line-height: 1.75rem;
-    text-decoration: none;
     color: #61a4ad;
 }
 
@@ -46,29 +53,84 @@ body {
     height: 25px;
 }
 
-.side_panel {
+.ticket_panel {
     background-color: #ededed;
     width: 225px;
     height: 100%;
     left: 57px;
 }
 
-.side_panel span {
+.ticket_panel span {
     font-size: 1.25rem;
     line-height: 1.75rem;
 }
 
-.side_panel .item_separate {
+.ticket_panel .item_separate {
     width: 86%;
 }
 
-.side_panel a {
+.ticket_panel a {
     font-size: 1.1rem;
     line-height: 1.75rem;
     text-decoration: none;
     color: #003b46;
 }
 
-.side_panel a:hover {
+.ticket_panel a:hover {
     color: #61a4ad;
+}
+
+.agent_header {
+    height: 57px;
+    width: 100%;
+    left: 57px;
+    border-width: 0px 0px 1px 0px !important;
+    border-color: #07575b !important;
+}
+
+.agent_header span {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    color: #003b46;
+}
+
+.dept {
+    height: 45%;
+    width: 15%;
+    left: 100px;
+    top: 100px;
+    border: 2px solid #003b46;
+}
+
+.dept .add_dept {
+    background-color: #07575b;
+    color: #c0dee5;
+    font-size: 1.5rem;
+    line-height: 1.75rem;
+    width: 90%;
+    margin-top: 50%;
+}
+
+.dept .add_dept:hover {
+    background-color: #c0dee5;
+    color: #003b46;
+}
+
+.login_form {
+    background-color: #c0dee5;
+    height: 100vh;
+}
+
+.login_form button {
+    width: 100%;
+    background-color: #61a4ad;
+    font-size: 1.25rem;
+    color: #003b46;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    line-height: 1.5rem;
+    padding: 6px 12px;
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
 }
