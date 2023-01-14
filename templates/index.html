@@ -25,17 +25,26 @@
     
 
     <title>Dashboard</title>
+
+    <style>
+        textarea:focus, input[type=text]:focus{
+            outline: none !important;
+            box-shadow: none !important;
+        }
+    </style>
 </head>
 
 <body>
     <div class="container-fluid">
-        {% include 'sidebar-admin.html' %}
-        {% include 'sidebar-panel-admin.html' %}
+        {% block sidebar%}{% endblock %}
+        {% block side_panel%}{% endblock %}
     </div>
 
     <main>
-        <!--  -->
+        {% block section%}{% endblock %}
+        
     </main>
+    {% block modals %}{% endblock %}
 
 
     <!-- Bootstrap JS, Popper.js, and jQuery CDN -->
@@ -44,7 +53,7 @@
     integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" 
     crossorigin="anonymous"></script>
         <script>
-           const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+            const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
             const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
         </script>
 </body>

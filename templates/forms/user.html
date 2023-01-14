@@ -1,69 +1,144 @@
 {% extends "index.html" %}
 
-{% block section %}
-<div class="row d-flex align-items-stretch" style="height:100vh!important;">
-  <div class="col-3 d-flex flex-column p-2 border-end ">
-    <div class="p-3 d-flex justify-content-center">
-      <button href="" class="btn btn-secondary d-flex w-50 d-flex justify-content-center row gx-2 py-3"
-        data-toggle="modal" data-target="#exampleModalCenter">
-        <i class="bi bi-ticket-detailed col-3"></i>
-        <span class="col-9">Compose</span>
-      </button>
-      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
+{% block sidebar %}
+<!-- Sidebar -->
+<div class="side_bar position-absolute start-0">
 
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+  <!-- Upper Items -->
+  <ul class="nav nav-pills nav-flush flex-column text-center position-absolute top-0">
+      <li class="nav-item">
+          <a href="#" class="nav-link py-2 my-2" data-bs-original-title="Tickets"
+          data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Tickets">
+              <i class="bi bi-ticket-fill"></i>
+          </a>
+      </li>
 
-    <hr>
+      <li class="nav-item">
+          <a href="#" class="nav-link py-2 my-2" data-bs-original-title="Agents"
+          data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Agents">
+              <i class="fa-solid fa-users"></i>
+             
+          </a>
+      </li>
+  </ul>
 
-  </div>
+  <!-- Lower Items -->
+  <ul class="nav nav-pills nav-flush flex-column text-center position-absolute bottom-0">
+      <li class="nav-item">
+          <a href="#" class="nav-link py-2 my-2" data-bs-original-title="Settings"
+          data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Settings">
+              <i class="bi bi-gear-wide-connected"></i>
+          </a>
+      </li>
+
+      <li class="nav-item">
+          <a href="#" class="nav-link py-2 my-2" data-bs-original-title="Help"
+          data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Help">
+              <i class="bi bi-question-circle-fill"></i>
+          </a>
+      </li>
+
+      <hr class="my-2 mx-auto text-center">
+
+      <li class="nav-item">
+          <a href="#" class="nav-link py-2 my-2" data-bs-original-title="User Profile">
+              <img src="{{ url_for('static', filename='images/placeholder.png') }}" alt="placeholder">
+          </a>
+      </li>
+  </ul>
+</div>
+<!-- /Sidebar -->
+{% endblock %}
+
+{% block side_panel %}
+<!-- side_panel -->
+<div class="side_panel position-fixed end-0">
+  <span class="row m-4">
+      Tickets
+      <i class="bi bi-ticket-detailed col ps-2"></i>
+  </span>
+
+  <hr>
+
+  <ul class="nav nav-pills nav-flush flex-column m-2">
+      <li class="nav-item">
+          <a href="#" class="nav-link py-1 my-2 ps-4"
+          data-bs-toggle="modal" data-bs-target="#composeModal">
+            <i class="bi bi-pen"></i>
+            Compose ticket</a>
+      </li>
+
+      <hr class="item_separate mt-2 mx-auto text-center">
+
+      <li class="nav-item">
+          <a href="#" class="nav-link py-1 my-1">Unassigned</a>
+      </li>
+
+      <li class="nav-item">
+          <a href="#" class="nav-link py-1 my-1">Pending</a>
+      </li>
+
+      <li class="nav-item">
+          <a href="#" class="nav-link py-1 my-1">On Hold</a>
+      </li>
+
+      <hr class="item_separate mt-2 mx-auto text-center">
+
+      <li class="nav-item">
+          <a href="#" class="nav-link py-1 my-1">Ticket Summary</a>
+      </li>
+
+      <li class="nav-item">
+          <a href="#" class="nav-link py-1 my-1">Archive</a>
+      </li>
+
+  </ul>
+</div>
+<!-- /side_panel -->
+{% endblock %}
+
+{% block main_content %}
+<!-- content -->
+div.card.border-0
+<!-- /content -->
+{% endblock %}
 
 
-  <div class="col-9">
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-      Launch demo modal
-    </button>
-
-    <!-- Modal -->
-    <div class="modal" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-      aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
+{% block modals %}
+<div class="modal" id="composeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            ...
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
+            <div class="modal-header py-0" >
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Compose New Ticket</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="">
+                <div class="modal-body">
+                    <!-- <div class="row my-1 border-bottom">
+                        <label for="toInput" class="col-sm-1 fs-6">To.</label>
+                        <div class="col-sm-11 ">
+                            <input type="text" name="" id="toInput" class="form-control form-control-sm border-0">
+                        </div>
+                    </div> -->
+                    <div class="row my-1 border-bottom">
+                        <label for="subjInput" class="col-sm-2 fs-6">Subject</label>
+                        <div class="col-sm-10 ">
+                            <input type="text" name="" id="subjInput" class="form-control form-control-sm border-0">
+                        </div>
+                    </div>
+                    <div class="row border-bottom py-3" >
+                        <textarea name="" id="" rows="10" class="form-control border-0"></textarea>
+                    </div>
+                    
+                    <input type="file" name="" id="" class="form-control form-control-sm mt-2">
+                </div>
+                <div class="modal-footer border-top py-0">
+                    <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                    <button type="button" class="btn btn-primary rounded-pill">Send</button>
+                </div>
+            </form>
         </div>
-      </div>
     </div>
-  </div>
 </div>
 
 {% endblock %}
