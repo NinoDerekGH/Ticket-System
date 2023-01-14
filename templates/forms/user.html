@@ -1,163 +1,169 @@
 {% extends "index.html" %}
 
 {% block sidebar %}
+
 <!-- Sidebar -->
-<div class="side_bar position-absolute start-0">
+<nav class="side_bar position-absolute start-0">
 
   <!-- Upper Items -->
   <ul class="nav nav-pills nav-flush flex-column text-center position-absolute top-0">
-      <li class="nav-item">
-          <a href="#" class="nav-link py-2 my-2" data-bs-original-title="Tickets"
-          data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Tickets">
-              <i class="bi bi-ticket-fill"></i> 
-          </a>
-      </li>
+    <span class="logo nav-link py-2 my-2">
+      <i class="bi bi-badge-tm-fill"></i>
+    </span>
 
-      <li class="nav-item">
-          <a href="#" class="nav-link py-2 my-2" data-bs-original-title="Agents"
-          data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Agents">
-              <i class="fa-solid fa-users"></i>
-          </a>
-      </li>
+    <li class="nav-item">
+      <a href="#" class="nav-link py-2 my-2" data-bs-original-title="Tickets" data-bs-toggle="tooltip"
+        data-bs-placement="right" data-bs-title="Tickets">
+        <i class="bi bi-ticket-fill"></i>
+      </a>
+    </li>
+
+    <li class="nav-item">
+      <a href="#" class="nav-link py-2 my-2" data-bs-original-title="Agents" data-bs-toggle="tooltip"
+        data-bs-placement="right" data-bs-title="Agents">
+        <i class="fa-solid fa-users"></i>
+
+      </a>
+    </li>
   </ul>
 
   <!-- Lower Items -->
   <ul class="nav nav-pills nav-flush flex-column text-center position-absolute bottom-0">
-      <li class="nav-item">
-          <a href="#" class="nav-link py-2 my-2" data-bs-original-title="Settings"
-          data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Settings">
-              <i class="bi bi-gear-wide-connected"></i>
-          </a>
-      </li>
+    <li class="nav-item">
+      <a href="#" class="nav-link py-2 my-2" data-bs-original-title="Settings" data-bs-toggle="tooltip"
+        data-bs-placement="right" data-bs-title="Settings">
+        <i class="bi bi-gear-wide-connected"></i>
+      </a>
+    </li>
 
-      <li class="nav-item">
-          <a href="#" class="nav-link py-2 my-2" data-bs-original-title="Help"
-          data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Help">
-              <i class="bi bi-question-circle-fill"></i>
-          </a>
-      </li>
+    <li class="nav-item">
+      <a href="#" class="nav-link py-2 my-2" data-bs-original-title="Help" data-bs-toggle="tooltip"
+        data-bs-placement="right" data-bs-title="Help">
+        <i class="bi bi-question-circle-fill"></i>
+      </a>
+    </li>
 
-      <hr class="my-2 mx-auto text-center">
+    <hr class="my-2 mx-auto text-center">
 
-      <li class="nav-item">
-          <a href="#" class="nav-link py-2 my-2" data-bs-original-title="User Profile">
-              <img src="{{ url_for('static', filename='images/placeholder.png') }}" alt="placeholder">
-          </a>
-      </li>
+    <li class="nav-item">
+      <a href="#" class="nav-link py-2 my-2" data-bs-original-title="User Profile">
+        <img src="{{ url_for('static', filename='images/placeholder.png') }}" alt="placeholder">
+      </a>
+    </li>
   </ul>
-</div>
+</nav>
 <!-- /Sidebar -->
 {% endblock %}
 
 {% block side_panel %}
 <!-- side_panel -->
-<div class="side_panel position-fixed end-0">
+<div class="ticket_panel position-fixed end-0">
   <span class="row m-4">
-      Tickets
-      <i class="bi bi-ticket-detailed col ps-2"></i>
+    Tickets
+    <i class="bi bi-ticket-detailed col ps-2"></i>
   </span>
-<div class="row d-flex align-items-stretch" style="height:100vh!important;">
-  <div class="col-3 d-flex flex-column p-2 border-end ">
-    <div class="p-3 d-flex justify-content-center">
-      <button href="" class="btn btn-secondary d-flex w-50 d-flex justify-content-center row gx-2 py-3"
-        data-toggle="modal" data-target="#exampleModalCenter">
-        <i class="bi bi-ticket-detailed col-3"></i>
-        <span class="col-9">Compose</span>
-      </button>
-      <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
+  <div class="row d-flex align-items-stretch" style="height:100vh!important;">
+    <div class="col-3 d-flex flex-column p-2 border-end ">
+      <div class="p-3 d-flex justify-content-center">
+        <button href="" class="btn btn-secondary d-flex w-50 d-flex justify-content-center row gx-2 py-3"
+          data-toggle="modal" data-target="#exampleModalCenter">
+          <i class="bi bi-ticket-detailed col-3"></i>
+          <span class="col-9">Compose</span>
+        </button>
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+          aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
 
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
             </div>
           </div>
         </div>
       </div>
+
+      <hr>
+
     </div>
 
-    <hr>
 
-  </div>
+    <div class="col-9">
+      <!-- Button trigger modal -->
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+        Launch demo modal
+      </button>
 
-
-  <div class="col-9">
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-      Launch demo modal
-    </button>
-
-    <!-- Modal -->
-    <div class="modal" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-      aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header py-0" >
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Compose New Ticket</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <!-- Modal -->
+      <div class="modal" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header py-0">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Compose New Ticket</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <!-- <div class="row my-1 border-bottom">
+              <!-- <div class="row my-1 border-bottom">
                     <label for="toInput" class="col-sm-1 fs-6">To.</label>
                     <div class="col-sm-11 ">
                         <input type="text" name="" id="toInput" class="form-control form-control-sm border-0">
                     </div>
                 </div> -->
-                <div class="row my-1 border-bottom">
-                    <label for="subjInput" class="col-sm-2 fs-6">Subject</label>
-                    <div class="col-sm-10 ">
-                        <input type="text" name="" id="subjInput" class="form-control form-control-sm border-0">
-                    </div>
+              <div class="row my-1 border-bottom">
+                <label for="subjInput" class="col-sm-2 fs-6">Subject</label>
+                <div class="col-sm-10 ">
+                  <input type="text" name="" id="subjInput" class="form-control form-control-sm border-0">
                 </div>
-                <div class="row border-bottom py-3" >
-                    <textarea name="" id="" rows="10" class="form-control border-0"></textarea>
-                </div>
-                
-                <input type="file" name="" id="" class="form-control form-control-sm mt-2">
+              </div>
+              <div class="row border-bottom py-3">
+                <textarea name="" id="" rows="10" class="form-control border-0"></textarea>
+              </div>
+
+              <input type="file" name="" id="" class="form-control form-control-sm mt-2">
             </div>
             <div class="modal-footer border-top py-0">
-                <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
-                <button type="button" class="btn btn-primary rounded-pill" id="send">Send</button>
+              <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+              <button type="button" class="btn btn-primary rounded-pill" id="send">Send</button>
             </div>
+          </div>
         </div>
-    </div>
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            ...
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
         </div>
       </div>
     </div>
   </div>
+</div>
 </div>
 
 {% endblock %}
 
 {% block jsfunction %}
 <script>
-    $(document).ready(function(){
-        $('#send').click(function() {
-            $.post('http://127.0.0.1:5000/')
-        });
+  $(document).ready(function () {
+    $('#send').click(function () {
+      $.post('http://127.0.0.1:5000/')
     });
+  });
 </script>
 {% endblock %}

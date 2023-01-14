@@ -4,7 +4,7 @@ app = Flask(__name__, static_folder='static', template_folder='templates')
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('forms/user.html')
 
 @app.route('/login')
 def login():
