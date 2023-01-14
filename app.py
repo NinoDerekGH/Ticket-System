@@ -18,6 +18,16 @@ def unassigned():
     return render_template('vendor/unassigned.html')
 
 
+@app.route('/pending')
+def pending():
+    return render_template('vendor/pending.html')
+
+
+@app.route('/onhold')
+def onhold():
+    return render_template('vendor/onhold.html')
+
+
 @app.route('/register')
 def register():
     return render_template('register.html')

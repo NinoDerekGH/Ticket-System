@@ -1,8 +1,11 @@
 {% extends "index.html" %}
 
-{% block sidebar %}
-<div class="side_bar position-absolute start-0">
+<!-- {% include 'sidebar-admin.html' %} -->
 
+
+
+<!-- {% block sidebar %}
+<div class="side_bar position-absolute start-0">
 
     <ul class="nav nav-pills nav-flush flex-column text-center position-absolute top-0">
         <li class="nav-item">
@@ -46,9 +49,9 @@
         </li>
     </ul>
 </div>
-{% endblock %}
+{% endblock %} -->
 
-{% block side_panel %}
+<!-- {% block side_panel %}
 <div class="ticket_panel position-fixed end-0">
     <span class="row m-4">
         Tickets
@@ -90,7 +93,7 @@
 
     </ul>
 </div>
-{% endblock %}
+{% endblock %} -->
 
 {% block section %}
 
@@ -576,11 +579,12 @@
 </table>
 
 
+
 <script>
     $(document).ready(function () {
         $('#law').DataTable();
     });
 </script>
 
-
-{% endblock %}
+<!-- 
+{% endblock %} -->
