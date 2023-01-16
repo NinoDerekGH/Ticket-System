@@ -26,13 +26,13 @@ body {
     font-size: 1rem;
 }
 
-.sidebar_panel a {
+.sidebar_panel .items {
     text-decoration: none;
     color: #000000;
     font-size: 1.05rem;
 }
 
-.sidebar_panel a:hover {
+.sidebar_panel .items:hover {
     color: #ffffff;
     background-color: #07575b;
 }

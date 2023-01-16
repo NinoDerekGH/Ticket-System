@@ -3,8 +3,8 @@
 {% block title %}Admin Dashboard{% endblock %}
 
 {% block admin %}
-<!-- Sidebar -->
 
+<!-- Sidebar -->
 <div class="sidebar_panel position-absolute start-0">
     <!-- Header -->
     <a href="#" class="d-flex align-items-center justify-content-center text-decoration-none link-dark">
@@ -16,7 +16,7 @@
 
     <ul class="nav nav-pills flex-column justify-content-center mx-1">
         <li class="nav-item">
-            <a href="#" class="nav-link" aria-current="tickets">
+            <a href="#" class="nav-link items" aria-current="tickets">
                 <i class="bi bi-ticket-detailed me-2"></i>
                 Tickets
             </a>
@@ -24,14 +24,14 @@
 
         <ul class="nav nav-pills list-group-item ms-3">
             <li class="nav-item">
-                <a href="#" class="nav-link" aria-current="unassigned">
+                <a href="#" class="nav-link items" aria-current="unassigned">
                     <i class="bi bi-person-x-fill me-2"></i>
                     Unassigned
                 </a>
             </li>
 
             <li class="nav-item">
-                <a href="#" class="nav-link" aria-current="pending">
+                <a href="#" class="nav-link items" aria-current="pending">
                     <i class="bi bi-arrow-clockwise me-2"></i>
                     Pending
                     <div>
@@ -40,21 +40,21 @@
             </li>
 
             <li class="nav-item">
-                <a href="#" class="nav-link" aria-current="hold">
+                <a href="#" class="nav-link items" aria-current="hold">
                     <i class="fa-solid fa-hand me-2"></i>
                     On Hold
                 </a>
             </li>
 
             <li class="nav-item">
-                <a href="#" class="nav-link" aria-current="summary">
+                <a href="#" class="nav-link items" aria-current="summary">
                     <i class="bi bi-clock-history me-2"></i>
                     Ticket Summary
                 </a>
             </li>
 
             <li class="nav-item">
-                <a href="#" class="nav-link" aria-current="archive">
+                <a href="#" class="nav-link items" aria-current="archive">
                     <i class="bi bi-archive-fill me-2"></i>
                     Archive
                 </a>
@@ -64,31 +64,11 @@
         <hr class="my-2">
 
         <li class="nav-item">
-            <a href="#" class="nav-link" aria-current="agents">
+            <a href="#" class="nav-link items" aria-current="agents">
                 <i class="fa-solid fa-users me-2""></i>
                 Agents
             </a>
         </li>
     </ul>
-
-    <ul class=" nav nav-pills dropdown flex-column justify-content-center mx-1 position-absolute bottom-0">
-        <li class="nav-item">
-            <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle show" id="accountOptions"
-                data-bs-toggle="dropdown" aria-expanded="true">
-                <img src="{{ url_for('static', filename='images/placeholder.png') }}" alt="placeholder" class="profile">
-                <strong>Admin Account</strong>
-            </a>
-            <ul class="dropdown-menu text-small shadow show position-absolute m-0" aria-labelledby="accountOptions"
-                data-popper-placement="top-start">
-                <li class="nav-item">
-                    <a href="#" class="dropdown-item">Edit Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="dropdown-item">Logout</a>
-                </li>
-            </ul>
-        </li>
-    </ul>
 </div>
-
 {% endblock %}

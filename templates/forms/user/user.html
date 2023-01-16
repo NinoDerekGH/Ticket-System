@@ -1,50 +1,51 @@
 {% extends "forms/user/index.html" %}
 
+{% block title %}User Dashboard{% endblock %}
 
 {% block side_panel %}
-<!-- side_panel -->
-<div class="ticket_panel position-fixed end-0">
-    <span class="row m-4">
-        Tickets
-        <i class="bi bi-ticket-detailed col ps-2"></i>
-    </span>
+<!-- Sidebar -->
+<div class="sidebar_panel position-absolute start-0">
+    <!-- Header -->
+    <a href="#" class="d-flex align-items-center justify-content-center text-decoration-none link-dark">
+        <img src="{{ url_for('static', filename='images/aclc.png') }}" alt="ACLC Icon" class="logo ms-1 mt-3 me-2 mb-1">
+        <span class="mt-3">Helpdesk Software Support</span>
+    </a>
 
-    <hr>
+    <hr class="my-2">
 
-    <ul class="nav nav-pills nav-flush flex-column m-2">
+    <ul class="nav nav-pills flex-column justify-content-center mx-1">
         <li class="nav-item">
-            <a href="#" class="nav-link py-1 my-2 ps-4" data-bs-toggle="modal" data-bs-target="#composeModal">
+            <a href="#" class="nav-link items" data-bs-toggle="modal" data-bs-target="#composeModal">
                 <i class="bi bi-pen"></i>
                 Compose ticket</a>
         </li>
 
-        <hr class="item_separate mt-2 mx-auto text-center">
-
-        <!-- <li class="nav-item">
-            <a href="#" class="nav-link py-1 my-1">Unassigned</a>
-        </li>
+        <hr class="my-2">
 
         <li class="nav-item">
-            <a href="#" class="nav-link py-1 my-1">Pending</a>
+            <a href="#" class="nav-link items" aria-current="inbox">
+                <i class="bi bi-inbox-fill me-2"></i>
+                Inbox
+            </a>
         </li>
 
-        <li class="nav-item">
-            <a href="#" class="nav-link py-1 my-1">On Hold</a>
-        </li>
+        <ul class="nav nav-pills list-group-item ms-3">
+            <li class="nav-item">
+                <a href="#" class="nav-link items" aria-current="sent">
+                    <i class="bi bi-send-check-fill me-2"></i>
+                    Sent
+                </a>
+            </li>
 
-        <hr class="item_separate mt-2 mx-auto text-center"> -->
-
-        <li class="nav-item">
-            <a href="#" class="nav-link py-1 my-1">Ticket Summary</a>
-        </li>
-
-        <li class="nav-item">
-            <a href="#" class="nav-link py-1 my-1">Archive</a>
-        </li>
-
+            <li class="nav-item">
+                <a href="#" class="nav-link items" aria-current="archive">
+                    <i class="bi bi-archive-fill me-2"></i>
+                    Archive
+                </a>
+            </li>
+        </ul>
     </ul>
 </div>
-<!-- /side_panel -->
 {% endblock %}
 
 {% block content %}
@@ -67,12 +68,12 @@
                 </a>
             </li>
         </ul>
-        
+
     </div>
     <tbody>
-        
+
     </tbody>
-    
+
 </table>
 <div id="pagination"></div>
 <!-- /content -->
@@ -83,7 +84,7 @@
 <div class="modal" id="composeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header py-0">
+            <div class="modal-header my-2">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Compose New Ticket</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -98,7 +99,8 @@
                     <div class="row my-1 border-bottom">
                         <label for="subject" class="col-sm-2 fs-6">Subject</label>
                         <div class="col-sm-10 ">
-                            <input type="text" name="" id="subject" class="form-control form-control-sm border-0" required>
+                            <input type="text" name="" id="subject" class="form-control form-control-sm border-0"
+                                required>
                         </div>
                     </div>
                     <div class="row border-bottom py-3">
@@ -119,65 +121,65 @@
 
 {% endblock %}
 
-{% block  jsfunction %}
+{% block jsfunction %}
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
         // Set the number of rows per page
-    var rowsPerPage = 2;
-    
-    // Get a reference to the table
-    var table = $("table#tickets");
-    
-    // Get the total number of rows in the table
-    var totalRows = table.find("tbody tr").length;
-    
-    // Calculate the total number of pages
-    var totalPages = Math.ceil(totalRows / rowsPerPage);
-    
-    // Create the pagination buttons
-    for (var i = 1; i <= totalPages; i++) {
-    $("#pagination").append("<button class='page-btn'>" + i + "</button>");
-    }
-    
-    // Add a click event to the pagination buttons
-    $(".page-btn").on("click", function() {
-    // Get the current page number
-    var currentPage = $(this).text();
-    
-    // Hide all rows
-    table.find("tbody tr").hide();
-    
-    // Show the rows for the current page
-    table.find("tbody tr").slice((currentPage - 1) * rowsPerPage, currentPage * rowsPerPage).show();
-    });
-    
-    // Show the first page of rows by default
-    table.find("tbody tr").hide().slice(0, rowsPerPage).show();
+        var rowsPerPage = 2;
+
+        // Get a reference to the table
+        var table = $("table#tickets");
+
+        // Get the total number of rows in the table
+        var totalRows = table.find("tbody tr").length;
+
+        // Calculate the total number of pages
+        var totalPages = Math.ceil(totalRows / rowsPerPage);
+
+        // Create the pagination buttons
+        for (var i = 1; i <= totalPages; i++) {
+            $("#pagination").append("<button class='page-btn'>" + i + "</button>");
+        }
+
+        // Add a click event to the pagination buttons
+        $(".page-btn").on("click", function () {
+            // Get the current page number
+            var currentPage = $(this).text();
+
+            // Hide all rows
+            table.find("tbody tr").hide();
+
+            // Show the rows for the current page
+            table.find("tbody tr").slice((currentPage - 1) * rowsPerPage, currentPage * rowsPerPage).show();
+        });
+
+        // Show the first page of rows by default
+        table.find("tbody tr").hide().slice(0, rowsPerPage).show();
     });
 </script>
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
 
-        $.get('http://' + document.domain + ':' + location.port + '/user/getdata',function(data,status){
-           for( var key in data){
-            const element = data[key];
-            $('table#tickets >tbody ').append(`
+        $.get('http://' + document.domain + ':' + location.port + '/user/getdata', function (data, status) {
+            for (var key in data) {
+                const element = data[key];
+                $('table#tickets >tbody ').append(`
                 <tr>
                     <td><input type="checkbox" name="" id="${element.id}"></td>
                     <td>${element.subject}</td>
                     <td>${element.created_at}</td>
                 </tr>
             `)
-           } 
+            }
         });
 
 
-        $('#send').click(function() {
-            if ($('#subject').val().length != 0 || $('#content').val().length != 0){
+        $('#send').click(function () {
+            if ($('#subject').val().length != 0 || $('#content').val().length != 0) {
                 // var file = $('#file-input')[0].files[0];
                 // var formData = new FormData();
                 // formData.append('file', file);
-                
+
                 // $.ajax({
                 //     url: 'http://' + document.domain + ':' + location.port +'/user',
                 //     type: 'POST',
@@ -194,19 +196,19 @@
                 // });
 
                 $.post('http://' + document.domain + ':' + location.port + '/user', {
-                'subject': $('#subject').val(),
-                'content': $('#content').val(),
-            },function(data, status) {
-                console.log(data);
-                location.reload();
-            });
+                    'subject': $('#subject').val(),
+                    'content': $('#content').val(),
+                }, function (data, status) {
+                    console.log(data);
+                    location.reload();
+                });
             }
-            else{
+            else {
                 $('#warn-mail').html('To create a new ticket. Please include subject and its content.');
             }
-            
+
         });
-        
+
     });
 
 </script>
