@@ -51,9 +51,9 @@
 
 {% block content %}
 <!-- content -->
-<table id="tickets" class="table table-hover">
-    <div class="navbar navbar-expand">
-        <ul class="navbar-nav px-2 ">
+<table id="tickets" class="table table-hover table-scrolable mw-100">
+    <div class="navbar navbar-expand m-100 row border-bottom bg-light" style="position: sticky;top:0;">
+        <ul class="navbar-nav px-2 col-8">
             <li class="nav-item p-2">
                 <div class="form-group">
                     <input type="checkbox" name="" id="check-all">
@@ -70,9 +70,21 @@
                     <i class="bi bi-envelope"></i>
                 </a>
             </li>
+            <li class="nav-item align-self-end">
+                
+            </li>
         </ul>
-
+        <div class="col-4">
+            <div class="input-group ">
+                <input type="text" id="table-search" class="form-control border-start-0"  placeholder="Search">
+                <div class="input-group-text border-end-0">
+                    <i class="bi bi-search"></i>
+                </div>
+            </div>
+        </div>
+        
     </div>
+    
     <tbody>
 
     </tbody>
@@ -130,43 +142,15 @@
 {% endblock %}
 
 {% block jsfunction %}
+
 <script>
     $(document).ready(function () {
-        // Set the number of rows per page
-        var rowsPerPage = 2;
-
-        // Get a reference to the table
-        var table = $("table#tickets");
-
-        // Get the total number of rows in the table
-        var totalRows = table.find("tbody tr").length;
-
-        // Calculate the total number of pages
-        var totalPages = Math.ceil(totalRows / rowsPerPage);
-
-        // Create the pagination buttons
-        for (var i = 1; i <= totalPages; i++) {
-            $("#pagination").append("<button class='page-btn'>" + i + "</button>");
-        }
-
-        // Add a click event to the pagination buttons
-        $(".page-btn").on("click", function () {
-            // Get the current page number
-            var currentPage = $(this).text();
-
-            // Hide all rows
-            table.find("tbody tr").hide();
-
-            // Show the rows for the current page
-            table.find("tbody tr").slice((currentPage - 1) * rowsPerPage, currentPage * rowsPerPage).show();
+        $("#table-search").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("table#tickets tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
         });
-
-        // Show the first page of rows by default
-        table.find("tbody tr").hide().slice(0, rowsPerPage).show();
-    });
-</script>
-<script>
-    $(document).ready(function () {
 
         $.get('http://' + document.domain + ':' + location.port + '/user/getdata',function(data,status){
            for( var key in data){
@@ -180,15 +164,18 @@
             + timestamp.getDate() + ", " + timestamp.getFullYear();
             const formatTime = timestamp.getHours() + ":" + timestamp.getMinutes() +":" + timestamp.getSeconds();
             // !-- dateformating
-
             // limit String formats
             var limitedContent = element.content.length > 50 ? element.content.substring(0,60) + ' . . .': element.content;
             $('table#tickets > tbody ').append(`
-                <tr class="row" data-bs-toggle="modal" data-bs-target="#rowModal${element.id}">
-                    <td class="col-1">
-                        <input class="mail-check" type="checkbox" name=""  id="${element.id}">
+                <tr class="row" >
+                    <td class="col-1 ">
+                        <div class="form-grou p-2">
+                            <input class="mail-check"  type="checkbox" name=""  id="${element.id}">
+                        </div>
                     </td>
-                    <td class="col-2 ">${element.subject}</td>
+                    <td class="col-2 " data-bs-toggle="modal" data-bs-target="#rowModal${element.id}">
+                        ${element.subject}
+                    </td>
                     <td class="col-6 text-secondary">${limitedContent}</td>
                     <td class="text-center col-2 text-muted">${formatedDate}<br>${formatTime}</td>
                     <td class="col-1"></td>
