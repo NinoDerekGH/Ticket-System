@@ -1,39 +1,19 @@
-<!-- Ticket Panel -->
-<section class="ticket_panel position-fixed end-0">
-    <span class="row m-4">
-        Browse Tickets
-        <i class="bi bi-ticket-detailed col ps-2"></i>
-    </span>
-
-    <hr>
-
-    <ul class="nav nav-pills nav-flush flex-column m-2">
-        <li class="nav-item">
-            <a href="#" class="nav-link py-1 my-2">All Tickets</a>
-        </li>
-
-        <hr class="item_separate mt-2 mx-auto text-center">
-
-        <li class="nav-item">
-            <a href="#" class="nav-link py-1 my-1">Unassigned</a>
-        </li>
-
-        <li class="nav-item">
-            <a href="#" class="nav-link py-1 my-1">Pending</a>
-        </li>
-
-        <li class="nav-item">
-            <a href="#" class="nav-link py-1 my-1">On Hold</a>
-        </li>
-
-        <hr class="item_separate mt-2 mx-auto text-center">
-
-        <li class="nav-item">
-            <a href="#" class="nav-link py-1 my-1">Ticket Summary</a>
-        </li>
-
-        <li class="nav-item">
-            <a href="#" class="nav-link py-1 my-1">Archive</a>
-        </li>
-    </ul>
-</section>
+<ul class="nav nav-pills nav-flush dropdown flex-column m-2 position-absolute top-0">
+    <li class="nav-item">
+        <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle show" id="accountOptions"
+            data-bs-toggle="dropdown" aria-expanded="true">
+            <img src="{{ url_for('static', filename='images/placeholder.png') }}" alt="placeholder">
+            <strong>Admin Account</strong>
+        </a>
+        <ul class="dropdown-menu text-small shadow show position-absolute m-0" aria-labelledby="accountOptions"
+            data-popper-placement="top-start">
+            <li class="nav-item">
+                <a href="#" class="dropdown-item">Edit Profile</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="dropdown-item">Logout</a>
+            </li>
+        </ul>
+    </li>
+</ul>
+</div> -->

@@ -1,0 +1,94 @@
+{% extends "index.html" %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block admin %}
+<!-- Sidebar -->
+
+<div class="sidebar_panel position-absolute start-0">
+    <!-- Header -->
+    <a href="#" class="d-flex align-items-center justify-content-center text-decoration-none link-dark">
+        <img src="{{ url_for('static', filename='images/aclc.png') }}" alt="ACLC Icon" class="logo ms-1 mt-3 me-2 mb-1">
+        <span class="mt-3">Helpdesk Software Support</span>
+    </a>
+
+    <hr class="my-2">
+
+    <ul class="nav nav-pills flex-column justify-content-center mx-1">
+        <li class="nav-item">
+            <a href="#" class="nav-link" aria-current="tickets">
+                <i class="bi bi-ticket-detailed me-2"></i>
+                Tickets
+            </a>
+        </li>
+
+        <ul class="nav nav-pills list-group-item ms-3">
+            <li class="nav-item">
+                <a href="#" class="nav-link" aria-current="unassigned">
+                    <i class="bi bi-person-x-fill me-2"></i>
+                    Unassigned
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="#" class="nav-link" aria-current="pending">
+                    <i class="bi bi-arrow-clockwise me-2"></i>
+                    Pending
+                    <div>
+                    </div>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="#" class="nav-link" aria-current="hold">
+                    <i class="fa-solid fa-hand me-2"></i>
+                    On Hold
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="#" class="nav-link" aria-current="summary">
+                    <i class="bi bi-clock-history me-2"></i>
+                    Ticket Summary
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="#" class="nav-link" aria-current="archive">
+                    <i class="bi bi-archive-fill me-2"></i>
+                    Archive
+                </a>
+            </li>
+        </ul>
+
+        <hr class="my-2">
+
+        <li class="nav-item">
+            <a href="#" class="nav-link" aria-current="agents">
+                <i class="fa-solid fa-users me-2""></i>
+                Agents
+            </a>
+        </li>
+    </ul>
+
+    <ul class=" nav nav-pills dropdown flex-column justify-content-center mx-1 position-absolute bottom-0">
+        <li class="nav-item">
+            <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle show" id="accountOptions"
+                data-bs-toggle="dropdown" aria-expanded="true">
+                <img src="{{ url_for('static', filename='images/placeholder.png') }}" alt="placeholder" class="profile">
+                <strong>Admin Account</strong>
+            </a>
+            <ul class="dropdown-menu text-small shadow show position-absolute m-0" aria-labelledby="accountOptions"
+                data-popper-placement="top-start">
+                <li class="nav-item">
+                    <a href="#" class="dropdown-item">Edit Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="dropdown-item">Logout</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+{% endblock %}
