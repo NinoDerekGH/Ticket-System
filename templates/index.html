@@ -45,11 +45,14 @@
 
 <body>
     <div class="container-fluid">
-        {% block sidebar%}{% endblock %}
-        {% block side_panel%}{% endblock %}
+        <!-- User Dashboard -->
+        {% block sidebar %}{% endblock %}
 
         <!-- Login Form & Register Form -->
         {% block content %}{% endblock %}
+
+        <!-- Admin Dashboard-->
+        {% block admin %}{% endblock %}
 
         <main>
             {% block section%}{% endblock %}

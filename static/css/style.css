@@ -10,75 +10,44 @@ body {
     height: 100vh;
 }
 
-.side_bar {
-    background-color: #07575b;
-    width: 57px;
-    height: 100%;
-}
-
-.side_bar .logo {
-    font-size: 1.6rem;
-    line-height: 1.75rem;
-    text-decoration: none;
-    color: #61a4ad;
-}
-
-.side_bar ul {
-    list-style-type: none;
-}
-
-.side_bar li:hover {
+.sidebar_panel {
     background-color: #c0dee5;
-}
-
-.side_bar a {
-    font-size: 1.25rem;
-    line-height: 1.75rem;
-    color: #61a4ad;
-}
-
-.side_bar a:hover {
-    color: #003b46;
-}
-
-.side_bar hr {
-    width: 75%;
-    color: #61a4ad;
-    border-width: 2px;
-}
-
-.side_bar img {
-    border-radius: 50%;
-    width: 25px;
-    height: 25px;
-}
-
-.ticket_panel {
-    background-color: #ededed;
-    width: 225px;
+    width: 250px;
     height: 100%;
     left: 57px;
 }
 
-.ticket_panel span {
-    font-size: 1.25rem;
-    line-height: 1.75rem;
+.sidebar_panel .logo {
+    width: 25px;
+    height: 30px;
 }
 
-.ticket_panel .item_separate {
-    width: 86%;
+.sidebar_panel span {
+    font-size: 1rem;
 }
 
-.ticket_panel a {
-    font-size: 1.1rem;
-    line-height: 1.75rem;
+.sidebar_panel .items {
     text-decoration: none;
-    color: #003b46;
+    color: #000000;
+    font-size: 1.05rem;
 }
 
-.ticket_panel a:hover {
-    color: #61a4ad;
+.sidebar_panel .items:hover {
+    color: #ffffff;
+    background-color: #07575b;
 }
+
+.sidebar_panel i {
+    font-size: 1.1rem;
+}
+
+.sidebar_panel .profile {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+}
+
+/* Agents */
 
 .agent_header {
     height: 57px;
