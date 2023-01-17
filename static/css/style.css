@@ -10,20 +10,22 @@ body {
     height: 100vh;
 }
 
+/* Sidebar */
 .sidebar_panel {
     background-color: #c0dee5;
-    width: 250px;
+    width: 240px;
     height: 100%;
     left: 57px;
 }
 
 .sidebar_panel .logo {
-    width: 25px;
-    height: 30px;
+    width: 30px;
+    height: 35px;
 }
 
 .sidebar_panel span {
-    font-size: 1rem;
+    font-size: 1.50rem;
+    letter-spacing: 1px;
 }
 
 .sidebar_panel .items {
@@ -47,8 +49,11 @@ body {
     height: 30px;
 }
 
-/* Agents */
+.sidebar_panel .profile_name {
+    font-size: 1rem;
+}
 
+/* Agents */
 .agent_header {
     height: 57px;
     width: 100%;
@@ -85,12 +90,13 @@ body {
     color: #003b46;
 }
 
-.login_form {
+/* Login & Register Form */
+.custom_form {
     background-color: #c0dee5;
     height: 100vh;
 }
 
-.login_form button {
+.custom_form button {
     width: 100%;
     background-color: #61a4ad;
     font-size: 1.25rem;

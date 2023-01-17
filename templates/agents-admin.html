@@ -1,3 +1,9 @@
+{% extends "index.html" %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block agents %}
+
 <!-- Header -->
 <section class="agent_header position-fixed top-0 border-bottom">
     <span class="row my-3 mx-4">
@@ -6,12 +12,12 @@
     </span>
 </section>
 
-<!-- Department Cards -->
+<!-- Cards -->
 <div class="dept card position-fixed">
     <div class="card-body align-items-center text-center">
         <button class="add_dept btn" type="button" data-bs-toggle="modal" data-bs-target="#create_dept">
             Add Department
         </button>
     </div>
-
 </div>
+{% endblock %}

@@ -1,8 +1,5 @@
 from flask import Flask, render_template, request, make_response
-from flask_mysqldb import MySQL
-from flask_login import LoginManager
-from flask_login import login_required
-
+from flaskext.mysql import MySQL
 
 from werkzeug.utils import secure_filename
 from werkzeug.datastructures import FileStorage
@@ -15,8 +12,7 @@ app = Flask(__name__, static_folder='static', template_folder='templates')
 app.config['UPLOAD_FOLDER'] = os.path.join(app.root_path, 'uploads')
 # DATABASE SETTINGS
 
-login_manager = LoginManager()
-login_manager.init_app(app)
+
 
 app.config['MYSQL_DATABASE_USER'] = 'root'
 app.config['MYSQL_DATABASE_PASSWORD'] = ''
@@ -26,48 +22,10 @@ app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 mysql = MySQL()
 mysql.init_app(app)
 
-# DATABASE CONFIG
+# /DATABASE SETTINGS
 
 
-class User:
-    def __init__(self, id, username, password, role):
-        self.id = id
-        self.username = username
-        self.password = password
-        self.role = role
 
-    def is_authenticated(self):
-        return True
-
-    def is_active(self):
-        return True
-
-    def is_anonymous(self):
-        return False
-
-    def get_id(self):
-        return str(self.id)
-
-
-@login_manager.user_loader
-def load_user(user_id):
-    cur = mysql.connection.cursor()
-    cur.execute("SELECT * FROM users WHERE user_id = {}".format(user_id))
-    user = cur.fetchone()
-    if user:
-        return user
-    return None
-
-
-@app.route('/login')
-def login():
-    return render_template('login.html')
-
-
-@app.route('/')
-@login_required
-def index():
-    return render_template('forms/user/user.html')
 
 
 @app.route('/user/getdata')
@@ -163,6 +121,9 @@ def register():
 def admin():
     return render_template('admin.html')
 
+@app.route('/agents')
+def agents():
+    return render_template('agents-admin.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
