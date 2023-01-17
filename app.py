@@ -81,13 +81,39 @@ def getdata():
     results = cursor.fetchall()
     json_res = {}
     for res in results:
-        json_res[res[0]] = dict(
-            zip([col[0] for col in cursor.description], res))
+        json_res[res[0]] = dict(zip([col[0] for col in cursor.description], res))
+
+    cursor.close()
+    connect.close()
     return json_res
 
+@app.route('/user/update', methods=['POST'])
+def update():
+    try:
+        id = request.form['id']
+        archived = request.form['archive']
+        
+        connect = mysql.connect()
+        cursor = connect.cursor()
 
-@app.route('/user', methods=['POST'])
-def send():
+        sql = 'UPDATE tickets SET archived = %s WHERE id = %s;'
+        values = (archived, id)
+        
+        cursor.execute(sql,values)
+        connect.commit()
+
+        cursor.close()
+        connect.close()
+        
+        return make_response({'success' : 'update Successfully'},200)
+    except Exception as error:
+        print (error)
+
+    return ""
+
+
+@app.route('/user/ticketsend', methods=['POST'])
+def sendticket():
     try:
         id = "2"
         subject = request.form['subject']
@@ -96,27 +122,18 @@ def send():
         # Oppen Connection for ticketing_db
         connect = mysql.connect()
         cursor = connect.cursor()
+        
+        sql = 'INSERT INTO tickets (subject, content, department_id, created_at) VALUES (%s, %s,%s, %s);'
+        var = (subject, content, id, datetime.now())
 
-        sql = 'INSERT INTO tickets (subject, content, user_id, priority, created_at) VALUES (%s, %s,%s, %s, %s);'
-        var = (subject, content, id, "normal", datetime.now())
-
-        cursor.execute(sql, var)
-        ticket_id = cursor.lastrowid
+        cursor.execute(sql,var)
+        
         connect.commit()
         # Close Current Connection
         cursor.close()
         connect.close()
-        # # print ()
-        # filepath  = os.path.join(app.root_path, 'uploads')
-        # file = request.files['file']
-        # if file:
-        #     filename = secure_filename(file.filename)
-        #     file.save(os.path.join('uploads', filename))
-        #     return make_response({'success' : 'Sent Successfully'},200)
-        # else:
-        #     return "No file found."
-
-        return make_response({'success': 'Sent Successfully'}, 200)
+        
+        return make_response({'success' : 'Sent Successfully'},200)
     except Exception as err:
         print(err)
     return ""

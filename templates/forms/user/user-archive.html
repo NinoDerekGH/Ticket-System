@@ -19,7 +19,7 @@
                 </div>
             </li>
             <li class="nav-item">
-                <a id="toArchive" class="nav-link p-2">
+                <a href="" class="nav-link p-2">
                     <i class="bi bi-trash3"></i>
                 </a>
             </li>
@@ -105,7 +105,7 @@
     $(document).ready(function () {
         
         
-       
+
 
         $("#table-search").on("keyup", function() {
             var value = $(this).val().toLowerCase();
@@ -128,12 +128,12 @@
             // !-- dateformating
             // limit String formats
             var limitedContent = element.content.length > 50 ? element.content.substring(0,60) + ' . . .': element.content;
-            if (element.archived != 1){
+            if (element.archived == 1){
                 $('table#tickets > tbody ').append(`
                     <tr class="row" >
                         <td class="col-1 ">
                             <div class="form-grou p-2">
-                                <input class="mail-check" type="checkbox" name=""  id="${element.id}">
+                                <input class="mail-check"  type="checkbox" name=""  id="${element.id}">
                             </div>
                         </td>
                         <td class="col-2 " data-bs-toggle="modal" data-bs-target="#rowModal${element.id}">
@@ -195,6 +195,7 @@
            } 
         });
 
+
         $('#send').click(function() {
             if ($('#subject').val().length != 0 || $('#content').val().length != 0){
 
@@ -217,7 +218,7 @@
                 //     }
                 // });
 
-                $.post('http://' + document.domain + ':' + location.port + '/user/ticketsend', {
+                $.post('http://' + document.domain + ':' + location.port + '/user', {
                     'subject': $('#subject').val(),
                     'content': $('#content').val(),
                 }, function (data, status) {
@@ -231,28 +232,13 @@
 
         });
 
+
         $('#check-all').change(function(){
             if($(this).is(':checked')){
                 $('.mail-check').prop('checked', true);
             }else{$('.mail-check').prop('checked', false);}
         });
         
-        $('a#toArchive').click(function(){
-            $('tbody tr input').each(function(){
-                if($(this).is(':checked')){
-                    const id = $(this)[0].id;
-
-                    $.post('http://' + document.domain + ':' + location.port + '/user/update', {
-                    'id': id,
-                    'archived': "1",
-                    }, function (data, status) {
-                        console.log(data);
-                        location.reload();
-                    });
-                    
-                };
-            });
-        });
     });
 
 </script>
