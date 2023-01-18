@@ -6,8 +6,8 @@
 
 <div class="custom_form row align-items-center justify-content-center">
     <div class="col-12 col-sm-8 col-md-6 col-lg-4 bg-white rounded p-4 shadow">
-        <form action="">
-
+        <form methods="post" action="">
+            {{ form.hidden_tag() }}
             <div class="mb-4 border-bottom border-dark-subtle">
                 <h3>Create Account</h3>
             </div>
@@ -17,7 +17,7 @@
                 <div class="col">
                     <div class="row">
                         <div class="col">
-                            <label for="fname" class="form-label">First Name<sup class="text-danger">*</sup></label>
+                            {{ form.username(class='form-control form-control-lg') }}
                             <input type="text" class="form-control" id="fname">
                         </div>
                         <div id="fname-error" class="text-danger"></div>
@@ -27,7 +27,7 @@
                 <div class="col">
                     <div class="row">
                         <div class="col">
-                            <label for="lname" class="form-label">Last Name<sup class="text-danger">*</sup></label>
+                            {{ form.email(class='form-control form-control-lg') }}
                             <input type="text" class="form-control" id="lname">
                         </div>
                         <div id="lname-error" class="text-danger"></div>
@@ -35,17 +35,17 @@
                 </div>
             </div>
 
-            <!-- Username -->
+            <!-- Password 1 -->
             <div class="mb-1">
-                <label for="uname" class="form-label">Username<sup class="text-danger">*</sup></label>
+                {{ form.password1(class='form-control form-control-lg') }}
                 <input type="text" class="form-control" id="uname">
             </div>
             <div id="uname-error" class="text-danger mb-3"></div>
 
-            <!-- Password -->
+            <!-- Password 2 -->
             <div class="mb-1">
-                <label for="pwd" class="form-label">Password<sup class="text-danger">*</sup></label>
-                <input type="password" class="form-control" id="pwd">
+                <{{ form.password2(class='form-control form-control-lg' ) }} <input type="password" class="form-control"
+                    id="pwd">
             </div>
             <div id="password-error" class="text-danger mb-3"></div>
 
@@ -57,7 +57,7 @@
                         Conditions</a></label>
             </div>
 
-            <button type="submit" class="mb-2" onclick="validateForm()">Create Account</button>
+            {{ form.submit(class='btn btn-dark btn-lg btn-block') }}
         </form>
         <p class="mb-0 text-center">Already have an account?
             <a href="{{ url_for('login') }}" class="text-decoration-none">Login Now</a>
