@@ -42,17 +42,15 @@
 
 <body>
     <div class="container-fluid">
-        <!-- Login Form & Register Form -->
-        {% block form %}{% endblock %}
+        <div class="row">
+            <div class="col-3">
+                {% include "/admin/side-panel.html" %}
+            </div>
 
-        <!----- Admin ----->
-
-        <!-- Tickets -->
-        {% block tickets %}{% endblock %}
-
-        <!-- Agents  -->
-        {% block agents %}{% endblock %}
-
+            <div class="col-9" style="position:absolute; height:100vh; overflow:auto; display:block;">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
     </div>
 
     <!-- Bootstrap Popper.js CDN -->

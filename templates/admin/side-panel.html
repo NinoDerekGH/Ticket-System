@@ -1,19 +1,15 @@
-{% extends "index.html" %}
-
-{% block sidebar %}
-
-<!-- Sidebar -->
 <div class="sidebar_panel position-absolute start-0">
-    <ul class="nav nav-pills flex-column justify-content-center mx-1">
-
-        <a href="#" class="d-flex text-decoration-none link-dark ms-3">
-            <img src="{{ url_for('static', filename='images/aclc.png') }}" alt="ACLC Icon"
+    
+    <!-- Header -->
+    <a href="#" class="d-flex text-decoration-none link-dark ms-3">
+        <img src="{{ url_for('static', filename='images/aclc.png') }}" alt="ACLC Icon"
                 class="logo ms-1 mt-3 me-2 mb-1">
-            <span class="mt-3">TechDesk</span>
-        </a>
+        <span class="mt-3">TechDesk</span>
+    </a>
 
-        <hr class="my-2">
+    <hr class="my-2">
 
+    <ul class="nav nav-pills flex-column justify-content-center mx-1">
         <li class="nav-item">
             <a href="#" class="nav-link items" aria-current="tickets">
                 <i class="bi bi-ticket-detailed me-2"></i>
@@ -33,8 +29,6 @@
                 <a href="#" class="nav-link items" aria-current="pending">
                     <i class="bi bi-arrow-clockwise me-2"></i>
                     Pending
-                    <div>
-                    </div>
                 </a>
             </li>
 
@@ -70,20 +64,14 @@
         </li>
     </ul>
 
-    <ul class="nav nav-pills justify-content-between list-group-horizontal position-absolute bottom-0">
-
-        <li class="list-group-item nav-item mx-1 mb-1">
-            <a href="#" class="nav-link items" aria-current="account">
-                <img src="{{ url_for('static', filename='images/placeholder.png') }}" alt="Profile" class="profile me-1">
-                <span class="profile_name">User/Admin</span>
-            </a>
-        </li>
-
-        <li class="list-group-item nav-item mt-1 ms-2">
-            <a href="#" class="nav-link items align-items-center">
-                <i class="bi bi-box-arrow-right"></i> 
-            </a>
-        </li>
-    </ul>
+    <div class="nav nav-pills dropup dropup-center position-absolute bottom-0">
+        <button class="nav-link mx-1 mb-1 dropdown-toggle link-dark" data-bs-toggle="dropdown">
+            <img src="{{ url_for('static', filename='images/placeholder.png') }}" alt="Profile" class="profile me-1">
+            <span class="profile_name">Admin</span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a href="#" class="dropdown-item">Settings</a></li>
+            <li><a href="#" class="dropdown-item">Logout</a></li>
+        </ul>
+    </div>
 </div>
-{% endblock %}
