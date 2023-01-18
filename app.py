@@ -97,32 +97,46 @@ def sendticket():
     return ""
 
 
-@app.route('/unassigned')
-def unassigned():
-    return render_template('vendor/unassigned.html')
-
-
-@app.route('/pending')
-def pending():
-    return render_template('vendor/pending.html')
-
-
-@app.route('/onhold')
-def onhold():
-    return render_template('vendor/onhold.html')
-
+# ------- Log & Reg Form Routes ------- #
+@app.route('/login')
+def login():
+    return render_template('login.html')
 
 @app.route('/register')
 def register():
     return render_template('register.html')
 
+
+# ------- Admin Routes ------- #
 @app.route('/admin')
 def admin():
-    return render_template('tickets.html')
+    return render_template('admin/index.html')
+
+@app.route('/unassigned')
+def unassigned():
+    return render_template('admin/unassigned.html')
+
+
+@app.route('/pending')
+def pending():
+    return render_template('admin/pending.html')
+
+@app.route('/onhold')
+def onhold():
+    return render_template('admin/onhold.html')
+
+@app.route('/summary')
+def summary():
+    return render_template('admin/summary.html')
+
+@app.route('/archive')
+def archive():
+    return render_template('admin/archive.html')
 
 @app.route('/agents')
 def agents():
-    return render_template('agents.html')
+    return render_template('admin/agents.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
