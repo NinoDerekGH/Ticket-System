@@ -116,14 +116,13 @@ def onhold():
 def register():
     return render_template('register.html')
 
-
 @app.route('/admin')
 def admin():
-    return render_template('admin.html')
+    return render_template('tickets.html')
 
 @app.route('/agents')
 def agents():
-    return render_template('agents-admin.html')
+    return render_template('agents.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

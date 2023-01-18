@@ -2,7 +2,7 @@
 
 {% block title %}Login Form{% endblock %}
 
-{% block content %}
+{% block form %}
 
 <div class="custom_form row align-items-center justify-content-center">
     <div class="col-12 col-sm-8 col-md-6 col-lg-4 bg-white rounded p-4 shadow">
@@ -12,12 +12,12 @@
                 <h3>Login Account</h3>
             </div>
 
-            <!-- Email Address-->
+            <!-- Username -->
             <div class="mb-1">
-                <label for="email" class="form-label">Email Address</label>
-                <input type="email" class="form-control" id="email">
+                <label for="uname" class="form-label">Username</label>
+                <input type="text" class="form-control" id="uname">
             </div>
-            <div id="email-error" class="text-danger mb-3"></div>
+            <div id="uname-error" class="text-danger mb-3"></div>
 
             <!-- Password -->
             <div class="mb-1">

@@ -1,99 +1,16 @@
 {% extends "index.html" %}
 
-<!-- {% include 'sidebar-admin.html' %} -->
+{% block title %}Admin Dashboard{% endblock %}
 
+{% include "sidebar.html" %}
 
-
-<!-- {% block sidebar %}
-<div class="side_bar position-absolute start-0">
-
-    <ul class="nav nav-pills nav-flush flex-column text-center position-absolute top-0">
-        <li class="nav-item">
-            <a href="#" class="nav-link py-2 my-2" data-bs-original-title="Tickets" data-bs-toggle="tooltip"
-                data-bs-placement="right" data-bs-title="Tickets">
-                <i class="bi bi-ticket-fill"></i>
-            </a>
-        </li>
-
-        <li class="nav-item">
-            <a href="#" class="nav-link py-2 my-2" data-bs-original-title="Agents" data-bs-toggle="tooltip"
-                data-bs-placement="right" data-bs-title="Agents">
-                <i class="fa-solid fa-users"></i>
-
-            </a>
-        </li>
-    </ul>
-
-
-    <ul class="nav nav-pills nav-flush flex-column text-center position-absolute bottom-0">
-        <li class="nav-item">
-            <a href="#" class="nav-link py-2 my-2" data-bs-original-title="Settings" data-bs-toggle="tooltip"
-                data-bs-placement="right" data-bs-title="Settings">
-                <i class="bi bi-gear-wide-connected"></i>
-            </a>
-        </li>
-
-        <li class="nav-item">
-            <a href="#" class="nav-link py-2 my-2" data-bs-original-title="Help" data-bs-toggle="tooltip"
-                data-bs-placement="right" data-bs-title="Help">
-                <i class="bi bi-question-circle-fill"></i>
-            </a>
-        </li>
-
-        <hr class="my-2 mx-auto text-center">
-
-        <li class="nav-item">
-            <a href="#" class="nav-link py-2 my-2" data-bs-original-title="User Profile">
-                <img src="{{ url_for('static', filename='images/placeholder.png') }}" alt="placeholder">
-            </a>
-        </li>
-    </ul>
-</div>
-{% endblock %} -->
-
-<!-- {% block side_panel %}
-<div class="ticket_panel position-fixed end-0">
-    <span class="row m-4">
-        Tickets
-        <i class="bi bi-ticket-detailed col ps-2"></i>
+<!-- Header -->
+<section class="ticket_header position-fixed top-0 border-bottom">
+    <span class="row my-3 mx-4">
+        Ticket Summary
+        <i class="bi bi-ui-checks col ps-2"></i>
     </span>
-
-    <hr>
-
-    <ul class="nav nav-pills nav-flush flex-column m-2">
-        <li class="nav-item">
-            <a href="#" class="nav-link py-1 my-2 ps-4" data-bs-toggle="modal" data-bs-target="#composeModal">
-                <i class="bi bi-pen"></i>
-                Compose ticket</a>
-        </li>
-
-        <hr class="item_separate mt-2 mx-auto text-center">
-
-        <li class="nav-item">
-            <a href="#" class="nav-link py-1 my-1">Unassigned</a>
-        </li>
-
-        <li class="nav-item">
-            <a href="#" class="nav-link py-1 my-1">Pending</a>
-        </li>
-
-        <li class="nav-item">
-            <a href="#" class="nav-link py-1 my-1">On Hold</a>
-        </li>
-
-        <hr class="item_separate mt-2 mx-auto text-center">
-
-        <li class="nav-item">
-            <a href="#" class="nav-link py-1 my-1">Ticket Summary</a>
-        </li>
-
-        <li class="nav-item">
-            <a href="#" class="nav-link py-1 my-1">Archive</a>
-        </li>
-
-    </ul>
-</div>
-{% endblock %} -->
+</section>
 
 {% block section %}
 
@@ -586,5 +503,4 @@
     });
 </script>
 
-<!-- 
-{% endblock %} -->
+{% endblock %}

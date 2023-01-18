@@ -55,23 +55,23 @@ body {
 
 /* Agents */
 .agent_header {
-    height: 57px;
+    height: 64px;
     width: 100%;
-    left: 57px;
+    left: 16%;
     border-width: 0px 0px 1px 0px !important;
     border-color: #07575b !important;
 }
 
 .agent_header span {
-    font-size: 1.25rem;
-    line-height: 1.75rem;
+    font-size: 1.50rem;
+    letter-spacing: 1px;
     color: #003b46;
 }
 
 .dept {
     height: 45%;
     width: 15%;
-    left: 100px;
+    left: 20%;
     top: 100px;
     border: 2px solid #003b46;
 }
@@ -108,4 +108,19 @@ body {
     text-align: center;
     display: inline-block;
     vertical-align: middle;
+}
+
+/* Tickets */
+.ticket_header {
+    height: 64px;
+    width: 100%;
+    left: 16%;
+    border-width: 0px 0px 1px 0px !important;
+    border-color: #07575b !important;
+}
+
+.ticket_header span {
+    font-size: 1.50rem;
+    letter-spacing: 1px;
+    color: #003b46;
 }

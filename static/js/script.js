@@ -3,8 +3,8 @@ function validateForm() {
     var firstnameError = document.getElementById("fname-error");
     var lastname = document.getElementById("lname").value;
     var lastnameError = document.getElementById("lname-error");
-    var email = document.getElementById("email").value;
-    var emailError = document.getElementById("email-error");
+    var username = document.getElementById("uname").value;
+    var usernameError = document.getElementById("uname-error");
     var password = document.getElementById("pwd").value;
     var passwordError = document.getElementById("password-error");
 
@@ -14,8 +14,8 @@ function validateForm() {
     if (lastname === "") {
       lastnameError.insertAdjacentHTML("beforeend", "Field is required!");
     }
-    if (email === "") {
-      emailError.insertAdjacentHTML("beforeend", "Field is required!");
+    if (username === "") {
+      usernameError.insertAdjacentHTML("beforeend", "Field is required!");
     }
     if (password === "") {
       passwordError.insertAdjacentHTML("beforeend", "Field is required!");
