@@ -20,6 +20,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
+        
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js"></script>
     <!-- Custom CSS File -->
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
@@ -41,8 +42,7 @@
 
         <div class="row">
             <div class="col-3">
-                {% include "user/sidebar.html" %}
-                {% block side_panel%}{% endblock %}
+                {% include "forms/user/side-panel.html"%}
             </div>
             <div class="col-9 " style="position: relative;height: 100vh;overflow: auto;display: block;">
                 {% block content%}{% endblock %}

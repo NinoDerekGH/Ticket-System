@@ -108,6 +108,8 @@ def logout():
     return redirect('/login')
 
 
+
+
 @app.route('/user/getdata')
 def getdata():
     connect = mysql.connect()
@@ -127,7 +129,46 @@ def getdata():
     return json_res
 
 
-@ app.route('/user/update', methods=['POST'])
+def exists(sql, value):
+    exist = False
+    try: 
+        connect = mysql.connect()
+        cursor =  connect.cursor()
+        cursor.execute(sql, value)
+        
+        row = cursor.fetchone()
+        if row:
+            exist = True
+        else:
+            pass
+    except Exception as error:
+        print(error)
+    finally:
+        cursor.close()
+        connect.close()
+    return exist
+    
+
+@app.route('/viewed', methods=['POST'])
+def viewed():
+    try:
+        id = request.form['id']
+        connect = mysql.connect()
+        cursor = connect.cursor() 
+
+        if exists("SELECT * FROM ticket_status WHERE ticket_id = %s", id) == False:
+            sql = ('INSERT INTO ticket_status (ticket_id, created_at) VALUES (%s, %s);')
+            values = (id,datetime.now())
+            cursor.execute(sql,values)
+            connect.commit()
+    except Exception as error:
+        print (error)
+    finally:
+        cursor.close()
+        connect.close()
+    return ""
+
+@app.route('/admin/update', methods=['POST'])
 def update():
     try:
         id = request.form['id']
@@ -152,7 +193,15 @@ def update():
     return ""
 
 
-@ app.route('/user/ticketsend', methods=['POST'])
+@app.route('/user/ticket')
+def userIndex():
+    return render_template('/forms/user/user.html')
+    
+@app.route('/user/arcive')
+def archiveIndex():
+    return render_template('/forms/user/user-archive.html')
+
+@app.route('/user/ticketsend', methods=['POST'])
 def sendticket():
     try:
         id = "2"

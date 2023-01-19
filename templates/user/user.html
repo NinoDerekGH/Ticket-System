@@ -2,10 +2,6 @@
 
 {% block title %}User Dashboard{% endblock %}
 
-{% block side_panel %}
-<!-- Sidebar -->
-{% include "user/side-panel.html"%}
-{% endblock %}
 
 {% block content %}
 <!-- content -->
@@ -51,7 +47,6 @@
 <div id="pagination"></div>
 <!-- /content -->
 {% endblock %}
-
 
 {% block modals %}
 <div class="modal" id="composeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -247,7 +242,7 @@
                         'archived': "1",
                     }, function (data, status) {
                         console.log(data);
-                        location.reload();
+                        
                     });
 
                 };

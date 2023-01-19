@@ -13,7 +13,7 @@ class User(db.Model):
 @app.route('/user', methods=['POST'])
 def create_user():
    
-    user = User(username='junzel gwapo', email='test@example.com')
+    user = User(username='junzel gwapo', email='juzn@example.com')
     db.session.add(user)
     db.session.commit()
 

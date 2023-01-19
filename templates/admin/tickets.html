@@ -52,3 +52,156 @@
     </tbody>
 </table>
 {% endblock %}
+
+{% block modals %}
+<div id="table-modal-conatainer">
+       
+</div>
+
+<div class="modal" id="rowModal1">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Ticket</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                
+                <div class="form-group row  border-bottom">
+                    <label for="trSubject" class="col-sm-2">Subject</label>
+                    <div class="col-sm-8">
+                        <input type="text" readonly value="${element.subject}" name="" id="" class="border-0 fs-6">
+                    </div>
+                    <a class="btn btn-secondary col-sm-2 h6" data-bs-toggle="modal" data-bs-target="#assign">Assign</a>
+                </div>
+                <br>
+                <div style="position: relative;height: 200px;overflow: auto;display: block;">
+                    <p >
+                        ${element.content}
+                    </p>
+                </div>
+                <div class="card border-top">
+                    <div class="card-header">
+                        Feedbacks
+                    </div>
+                    <div class="card-body" style="position: relative;height: 150px;overflow: auto;display: block;">
+                        
+                    </div>
+                    <div class="card-footer">
+                        <div class="form-inline">
+                            <div class="form-group row">
+                                <div class="col-11 ">
+                                    <textarea name="feedback" id="feedback"class="form-control " rows="1"></textarea>
+                                </div>
+                                <button class="btn btn-primary text-center col-1">
+                                    <i class="bi bi-send"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
+<div class="modal" id="assign">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-sm">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Assign Agents</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <div class="form-check ">
+                            <input type="checkbox" name="" id="sample" class="form-check-input">
+                            <label for="sample" class="form-check-label form-control">Sample</label>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div> 
+
+{% endblock %}
+
+
+{% block jsfunction%}
+
+<script>
+    $(document).ready(function() {
+        
+        $("#table-search").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("table#tickets tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+
+        $.get('http://' + document.domain + ':' + location.port + '/user/getdata',function(data,status){
+           for( var key in data){
+            // !dateformating
+            const element = data[key];
+            const timestamp = new Date(element.created_at);
+            const months = ["Jan.", "Feb.", "Mar.", "Apr.", "May.", "Jun.", "Jul.", "Aug.", 
+            "Sep.", "Oct.", "Nov.", "Dec."];
+            const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+            const formatedDate = days[timestamp.getDay()] + ", " +  months[timestamp.getMonth()] + " "
+            + timestamp.getDate() + ", " + timestamp.getFullYear();
+            const formatTime = timestamp.getHours() + ":" + timestamp.getMinutes() +":" + timestamp.getSeconds();
+            // !-- dateformating
+            // limit String formats
+            var limitedContent = element.content.length > 50 ? element.content.substring(0,60) + ' . . .': element.content;
+            if (element.archived != 1){
+                $('table#tickets > tbody ').append(`
+                    <tr class="row" >
+                        
+                        <td class="col-1 ">
+                            <div class="form-grou p-2">
+                                <input class="mail-check" type="checkbox" name=""  id="${element.id}">
+                            </div>
+                        </td>
+                        <td class="col-2 " data-bs-toggle="modal" data-bs-target="#rowModal${element.id}" id="${element.id}">
+                            
+                            ${element.subject}
+                        </td>
+                        <td class="col-6 text-secondary" data-bs-toggle="modal" data-bs-target="#rowModal${element.id}" id="${element.id}">
+                            ${limitedContent}
+                        </td>
+                       
+                        <td class="text-center col-2 text-muted">${formatedDate}<br>${formatTime}</td>
+                        <td class="col-1"></td>
+                    </tr>
+                `)
+
+                $('#table-modal-conatainer').append(`
+                    
+                `);
+            }
+           } 
+        });
+
+        $('table tbody').on('click','td[data-bs-toggle="modal"]',function(){
+            const id = $(this).attr('id')
+
+            $.post('http://' + document.domain + ':' + location.port + '/viewed', {
+                'id': id,
+            },function(data, status){
+                console.log(data)
+                
+            })
+            
+        });
+        
+        
+
+        
+
+       
+
+    });
+</script>
+
+{% endblock %}
