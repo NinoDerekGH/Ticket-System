@@ -1,0 +1,41 @@
+{% block title %}Login Form{% endblock %}
+
+{% block form %}
+
+<div class="custom_form row align-items-center justify-content-center">
+    <div class="col-12 col-sm-8 col-md-6 col-lg-4 bg-white rounded p-4 shadow">
+        <form method="POST" action="">
+            <div class="mb-4 border-bottom border-dark-subtle">
+                <h3>Login Account</h3>
+            </div>
+
+            <!-- Username -->
+            <div class="mb-1">
+                <label for="username" class="form-label">Username</label>
+                {{ form.username}}
+            </div>
+            <div id="uname-error" class="text-danger mb-3"></div>
+
+            <!-- Password -->
+            <div class="mb-1">
+                <label for="password" class="form-label">Password</label>
+                {{ form.password }}
+            </div>
+            <div id="password-error" class="text-danger mb-3"></div>
+
+            <!-- Remember -->
+            <div class="mb-4 form-check">
+                <input type="checkbox" class="form-check-input" id="remember">
+                <label for="remember" class="form-check-label">Remember Me!</label>
+            </div>
+
+            <button type="submit" class="mb-2" onclick="validateForm()">Login</button>
+        </form>
+        <p class="mb-0 text-center">Don't have an account?
+            <a href="{{ url_for('register') }}" class="text-decoration-none">Create
+                Account</a>
+        </p>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,68 @@
+{% block title %}Register Form{% endblock %}
+
+{% block form %}
+
+<div class="custom_form row align-items-center justify-content-center">
+    <div class="col-12 col-sm-8 col-md-6 col-lg-4 bg-white rounded p-4 shadow">
+        <form method="post" action="">
+
+            <div class="mb-4 border-bottom border-dark-subtle">
+                <h3>Create Account</h3>
+            </div>
+
+            <!-- Full Name -->
+            <div class="row mb-3">
+                <div class="col">
+                    <div class="row">
+                        <div class="col">
+                            <label for="fname" class="form-label">First Name<sup class="text-danger">*</sup></label>
+                            <input type="text" class="form-control" id="fname">
+                        </div>
+                        <div id="fname-error" class="text-danger"></div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="row">
+                        <div class="col">
+                            <label for="lname" class="form-label">Last Name<sup class="text-danger">*</sup></label>
+                            <input type="text" class="form-control" id="lname">
+                        </div>
+                        <div id="lname-error" class="text-danger"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Username -->
+            <div class="mb-1">
+                <label for="username1" class="form-label">Username<sup class="text-danger">*</sup></label>
+                {{ form.username }}
+            </div>
+            <div id="uname-error" class="text-danger mb-3"></div>
+
+            <!-- Password -->
+            <div class="mb-1">
+                <label for="password1" class="form-label">Password<sup class="text-danger">*</sup></label>
+                {{ form.password }}
+            </div>
+            <div id="password-error" class="text-danger mb-3"></div>
+
+
+            {{ form.role }}
+            <!-- T.A.C -->
+            <div class="mb-4 form-check">
+                <input type="checkbox" class="form-check-input" id="tac">
+                <label for="tac" class="form-check-label">I agree to the <a href="#" class="text-decoration-none">Terms
+                        and
+                        Conditions</a></label>
+            </div>
+
+            <button type="submit" class="mb-2" onclick="validateForm()">Create Account</button>
+        </form>
+        <p class="mb-0 text-center">Already have an account?
+            <a href="{{ url_for('login') }}" class="text-decoration-none">Login Now</a>
+        </p>
+    </div>
+</div>
+
+{% endblock %}

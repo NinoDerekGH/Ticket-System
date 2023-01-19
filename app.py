@@ -1,10 +1,11 @@
 from flask import Flask, render_template, request, make_response, redirect, url_for
-from flaskext.mysql import MySQL
-from flask_login import UserMixin, LoginManager, current_user, login_user, logout_user
+from flask_login import UserMixin, LoginManager, current_user, login_user, logout_user, login_required
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
-from wtforms.validators import DataRequired, Email, EqualTo
-import bcrypt
+from wtforms.validators import DataRequired, Email, EqualTo, Length
+from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask_bcrypt import Bcrypt
 
 from werkzeug.utils import secure_filename
 from werkzeug.datastructures import FileStorage
@@ -12,41 +13,43 @@ from werkzeug.datastructures import FileStorage
 from datetime import datetime
 import os
 
-
-app = Flask(__name__, static_folder='static', template_folder='templates')
+app = Flask(__name__, template_folder='templates', static_folder='static')
 app.config['UPLOAD_FOLDER'] = os.path.join(app.root_path, 'uploads')
 # DATABASE SETTINGS
-
-mysql = MySQL()
-
-app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = ''
-app.config['MYSQL_DATABASE_DB'] = 'ticketing_db'
-app.config['MYSQL_DATABASE_HOST'] = 'localhost'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:@127.0.0.1:3306/ticketing_db'
 app.config['SECRET_KEY'] = 'jollyhotdog'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-mysql.init_app(app)
+db = SQLAlchemy(app)
+bcrypt = Bcrypt(app)
+
+login_manager = LoginManager(app)
+login_manager.login_view = 'login'
+
 # /DATABASE SETTINGS
 
 
-class User(UserMixin):
-    def __init__(self, id, username, password, email):
-        self.id = id
-        self.name = username
-        self.password = password
-        self.email = email
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
-    def __repr__(self):
-        return "%d/%s/%s" % (self.id, self.name, self.password, self.email)
+
+class User(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    hashed_password = db.Column(db.String(120), nullable=False)
+    role = db.Column(db.String(20), nullable=False)
 
 
 class RegistrationForm(FlaskForm):
-    username = StringField('Username', validators=[DataRequired()])
+    username = StringField(
+        'Username', validators=[DataRequired(), Length(1, 16)])
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[
         DataRequired(),
         EqualTo('confirm', message="Password must match")
     ])
+    role = StringField('Role', validators=[DataRequired(), Length(1, 16)])
     confirm = PasswordField('Confirm Password')
     submit = SubmitField('Register')
 
@@ -57,58 +60,52 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Log In')
 
 
-login_manager = LoginManager()
-login_manager.init_app(app)
-
-
-@login_manager.user_loader
-def load_user(user_id):
-    conn = mysql.connect()
-    cursor = conn.cursor()
-    cursor.execute("SELECT * FROM users WHERE id = {}".format(user_id))
-    user = cursor.fetchone()
-    if user:
-        return User(user[0], user[1], user[2])
-    return None
-
 # ------- Log & Reg Form Routes ------- #
 
 
-@app.route('/login')
-def login():
-    form = LoginForm()
-    if form.validate_on_submit():
-        conn = mysql.connect()
-        cursor = conn.cursor()
-        cursor.execute("SELECT * FROM users WHERE email = %s",
-                       (form.emai.data,))
-        user = cursor.fetchone()
-        cursor.close()
-        conn.close()
-        if user and check_password_hash(user[3], form.password.data):
-            login_user(User(user[0], user[1], user[2]))
-            return redirect(url_for('login'))
-    return render_template('forms/user.html', form=form)
-
-
-@app.route('/register')
+@app.route('/registration', methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
-    if form.validate_on_submit():
-        conn = mysql.connect()
-        cursor = conn.cursor()
-        hashed_password = generate_password_hash(form.password.data)
-        cursor.execute("INSERT INTO users(name,email,password) VALUES(%s,%s,%s)",
-                       (form.username.data, form.email.data, hashed_password))
-        conn.commit()
-        cursor.close()
-        conn.close()
-        user = User(id=cursor.lastrowid,
-                    username=form.username.data, email=form.email.data)
-        login_user(user)
-        return redirect(url_for('login'))
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        role = request.form['role']
 
-    return render_template('forms/register.html', form=form)
+        hashed_password = bcrypt.generate_password_hash(password)
+        new_user = User(username=username,
+                        hashed_password=hashed_password, role=role)
+        db.session.add(new_user)
+        db.session.commit()
+        return redirect(url_for('login'))
+    return render_template('auth/registration.html', form=form)
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'GET':
+        form = LoginForm()
+        return render_template('auth/login.html', form=form)
+    username = request.form['username']
+    password = request.form['password']
+    user = User.query.filter_by(username=username).first()
+
+    if user:
+        if bcrypt.check_password_hash(user.hashed_password, password):
+            login_user(user)
+            if user.role == 'admin':
+                return render_template('admin/tickets.html')
+            else:
+                return render_template('user/user.html')
+        else:
+            return 'Invalid email or password, please try again.'
+    return render_template('admin/agents.html')
+
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect('/login')
 
 
 @app.route('/user/getdata')
@@ -130,7 +127,7 @@ def getdata():
     return json_res
 
 
-@app.route('/user/update', methods=['POST'])
+@ app.route('/user/update', methods=['POST'])
 def update():
     try:
         id = request.form['id']
@@ -155,7 +152,7 @@ def update():
     return ""
 
 
-@app.route('/user/ticketsend', methods=['POST'])
+@ app.route('/user/ticketsend', methods=['POST'])
 def sendticket():
     try:
         id = "2"
@@ -181,39 +178,40 @@ def sendticket():
         print(err)
     return ""
 
-
 # ------- Admin Routes ------- #
-@app.route('/admin')
+
+
+@ app.route('/admin')
 def admin():
     return render_template('admin/index.html')
 
 
-@app.route('/unassigned')
+@ app.route('/unassigned')
 def unassigned():
     return render_template('admin/unassigned.html')
 
 
-@app.route('/pending')
+@ app.route('/pending')
 def pending():
     return render_template('admin/pending.html')
 
 
-@app.route('/onhold')
+@ app.route('/onhold')
 def onhold():
     return render_template('admin/onhold.html')
 
 
-@app.route('/summary')
+@ app.route('/summary')
 def summary():
     return render_template('admin/summary.html')
 
 
-@app.route('/archive')
+@ app.route('/archive')
 def archive():
     return render_template('admin/archive.html')
 
 
-@app.route('/agents')
+@ app.route('/agents')
 def agents():
     return render_template('admin/agents.html')
 

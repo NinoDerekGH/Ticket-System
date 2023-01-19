@@ -1,4 +1,4 @@
-{% extends "index.html" %}
+{% extends "admin/index.html" %}
 
 {% block sidebar %}
 
@@ -70,18 +70,19 @@
         </li>
     </ul>
 
-    <ul class="nav nav-pills justify-content-between list-group-horizontal position-absolute bottom-0">
+    <ul class=" nav nav-pills justify-content-between list-group-horizontal position-absolute bottom-0">
 
         <li class="list-group-item nav-item mx-1 mb-1">
             <a href="#" class="nav-link items" aria-current="account">
-                <img src="{{ url_for('static', filename='images/placeholder.png') }}" alt="Profile" class="profile me-1">
+                <img src="{{ url_for('static', filename='images/placeholder.png') }}" alt="Profile"
+                    class="profile me-1">
                 <span class="profile_name">User/Admin</span>
             </a>
         </li>
 
         <li class="list-group-item nav-item mt-1 ms-2">
             <a href="#" class="nav-link items align-items-center">
-                <i class="bi bi-box-arrow-right"></i> 
+                <i class="bi bi-box-arrow-right"></i>
             </a>
         </li>
     </ul>
