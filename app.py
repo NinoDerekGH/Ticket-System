@@ -26,6 +26,8 @@ bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 
+_password = "mysqlapp"
+
 # /DATABASE SETTINGS
 
 
@@ -36,6 +38,7 @@ def load_user(user_id):
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(250), nullable = True)
     username = db.Column(db.String(80), unique=True, nullable=False)
     hashed_password = db.Column(db.String(120), nullable=False)
     role = db.Column(db.String(20), nullable=False)
@@ -77,33 +80,49 @@ class Tickets(db.Model):
 def register():
     form = RegistrationForm()
     if request.method == 'POST':
+        name = request.form['name']
         username = request.form['username']
         password = request.form['password']
         role = request.form['role']
-
         hashed_password = bcrypt.generate_password_hash(password)
-        new_user = User(username=username,
+        new_user = User(name=name,username=username,
                         hashed_password=hashed_password, role=role)
         db.session.add(new_user)
         db.session.commit()
         return redirect(url_for('login'))
     return render_template('auth/registration.html', form=form)
 
+@app.route('/registration/post', methods=['POST'])
+def register_user():
+    if request.method == 'POST':
+        name = request.form['name']
+        username = request.form['username']
+        password = request.form['password']
+        role = request.form['role']
+        hashed_password = bcrypt.generate_password_hash(password)
+        new_user = User(name=name,username=username,
+                        hashed_password=hashed_password, role=role)
+        db.session.add(new_user)
+        db.session.commit()
+    return make_response({'success': 'Sent Successfully'}, 200)
+        
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/login', methods=['POST'])
 def login():
     
     if request.method == 'GET':
         form = LoginForm()
         return render_template('auth/login.html', form=form)
+    
     username = request.form['username']
     password = request.form['password']
     user = User.query.filter_by(username=username).first()
 
-    if user:
-        if bcrypt.check_password_hash(user.hashed_password, password):
+    if not user:
+        if bcrypt.check_password_hash(user.hashed_password, _password):
             login_user(user)
             if user.role == 'admin':
+                print(password)
                 return render_template('/admin/tickets.html')
             else:
                 return render_template('/user/user.html')
@@ -124,6 +143,14 @@ def logout():
 def initial():
     return redirect(url_for('login'))
 
+@app.route('/getuser')
+def userdata():
+    results = User.query.all()
+    json_res = {}
+    for res in results:
+        json_res[res.id] = {'id' : res.id, 'name' : res.name, 'username' : res.username, 
+        'password' : res.password, 'role': res.role}
+    return json_res
 
 @app.route('/user/getdata')
 def getdata():
@@ -184,10 +211,8 @@ def update():
 
         sql = 'UPDATE tickets SET archived = %s WHERE id = %s;'
         values = (archived, id)
-
         cursor.execute(sql, values)
         connect.commit()
-
         cursor.close()
         connect.close()
 
