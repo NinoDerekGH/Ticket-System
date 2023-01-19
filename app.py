@@ -60,6 +60,14 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Log In')
 
+class Tickets(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    subject = db.Column(db.String(255), nullable=False)
+    content = db.Column(db.String(10000), nullable=False)
+    department_id = db.Column(db.Integer,nullable=False)
+    created_at = db.Column(db.Date, nullable=False)
+
+    
 
 # ------- Log & Reg Form Routes ------- #
 
@@ -108,25 +116,20 @@ def logout():
     logout_user()
     return redirect('/login')
 
-
+@app.route('/')
+def initial():
+    return redirect(url_for('login'))
 
 
 @app.route('/user/getdata')
 def getdata():
-    connect = db.connect()
-    cursor = connect.cursor()
-
-    sql = "SELECT * FROM tickets"
-    cursor.execute(sql)
-
-    results = cursor.fetchall()
+    results = Tickets.query.all()
     json_res = {}
     for res in results:
-        json_res[res[0]] = dict(
-            zip([col[0] for col in cursor.description], res))
+        
+        json_res[res.id] = {'id' : res.id, 'subject' : res.subject, 'content' : res.content,
+         'department_id' : res.department_id, 'created_at' : res.created_at }
 
-    cursor.close()
-    connect.close()
     return json_res
 
 
@@ -196,7 +199,7 @@ def update():
 
 @app.route('/user/ticket')
 def userIndex():
-    return render_template('/forms/user/user.html')
+    return render_template('/user/user.html')
     
 @app.route('/user/arcive')
 def archiveIndex():
@@ -209,19 +212,9 @@ def sendticket():
         subject = request.form['subject']
         content = request.form['content']
 
-        # Oppen Connection for ticketing_db
-        connect = db.connect()
-        cursor = connect.cursor()
-
-        sql = 'INSERT INTO tickets (subject, content, department_id, created_at) VALUES (%s, %s,%s, %s);'
-        var = (subject, content, id, datetime.now())
-
-        cursor.execute(sql, var)
-
-        connect.commit()
-        # Close Current Connection
-        cursor.close()
-        connect.close()
+        tikcet = Tickets(subject=subject,content=content,department_id= id,created_at= datetime.now())
+        db.session.add(tikcet)
+        db.session.commit()
 
         return make_response({'success': 'Sent Successfully'}, 200)
     except Exception as err:
@@ -231,9 +224,36 @@ def sendticket():
 
 # ------- Sidebar Routes ------- #
 
-@ app.route('/tickets')
+@ app.route('/admin')
+
 def tickets():
     return render_template('admin/tickets.html')
+
+
+@ app.route('/unassigned')
+def unassigned():
+    return render_template('admin/unassigned.html')
+
+
+@ app.route('/pending')
+def pending():
+    return render_template('admin/pending.html')
+
+
+@ app.route('/onhold')
+def onhold():
+    return render_template('admin/onhold.html')
+
+
+@ app.route('/summary')
+def summary():
+    return render_template('admin/summary.html')
+
+
+@ app.route('/archive')
+def archive():
+    return render_template('admin/archive.html')
+
 
 @ app.route('/agents')
 def agents():
