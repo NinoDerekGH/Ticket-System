@@ -66,6 +66,7 @@ class Tickets(db.Model):
     content = db.Column(db.String(10000), nullable=False)
     department_id = db.Column(db.Integer,nullable=False)
     created_at = db.Column(db.Date, nullable=False)
+    priority  = db.Column(db.Integer, nullable=False)
 
     
 
@@ -89,8 +90,9 @@ def register():
     return render_template('auth/registration.html', form=form)
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
+    
     if request.method == 'GET':
         form = LoginForm()
         return render_template('auth/login.html', form=form)
@@ -106,8 +108,10 @@ def login():
             else:
                 return render_template('/user/user.html')
         else:
-            return 'Invalid email or password, please try again.'
-    return render_template('admin/agents.html')
+            return 'You are not authorized to access this page', 403
+    else:
+        return 'You are not authorized to access this page', 403
+
 
 
 @app.route('/logout')
@@ -129,7 +133,6 @@ def getdata():
         
         json_res[res.id] = {'id' : res.id, 'subject' : res.subject, 'content' : res.content,
          'department_id' : res.department_id, 'created_at' : res.created_at }
-
     return json_res
 
 
@@ -198,7 +201,10 @@ def update():
 
 
 @app.route('/user/ticket')
+@login_required
 def userIndex():
+    if current_user.role != 'user':
+        return 'You are not authorized to access this page', 403
     return render_template('/user/user.html')
     
 @app.route('/user/arcive')
@@ -208,11 +214,12 @@ def archiveIndex():
 @app.route('/user/ticketsend', methods=['POST'])
 def sendticket():
     try:
-        id = "2"
+        id = request.form['id']
         subject = request.form['subject']
         content = request.form['content']
+        priority = request.form['priority']
 
-        tikcet = Tickets(subject=subject,content=content,department_id= id,created_at= datetime.now())
+        tikcet = Tickets(subject=subject,content=content,department_id= id,created_at= datetime.now(),priority=priority)
         db.session.add(tikcet)
         db.session.commit()
 
@@ -224,8 +231,8 @@ def sendticket():
 
 # ------- Sidebar Routes ------- #
 
-@ app.route('/admin')
-
+@app.route('/admin')
+@login_required
 def tickets():
     return render_template('admin/tickets.html')
 
@@ -256,13 +263,13 @@ def archive():
 
 
 @ app.route('/agents')
+@login_required
 def agents():
     return render_template('admin/agents.html')
 
 @ app.route('/inbox')
 def inbox():
     return render_template('user/user.html')
-
 
 if __name__ == '__main__':
     app.run(debug=True)
