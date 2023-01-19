@@ -1,31 +1,33 @@
 <div class="sidebar_panel position-absolute start-0">
+    
     <!-- Header -->
-    <a href="#" class="d-flex align-items-center justify-content-center text-decoration-none link-dark">
-        <img src="{{ url_for('static', filename='images/aclc.png') }}" alt="ACLC Icon" class="logo ms-1 mt-3 me-2 mb-1">
-        <span class="mt-3">Helpdesk Software Support</span>
+    <a href="#" class="d-flex text-decoration-none link-dark ms-3">
+        <img src="{{ url_for('static', filename='images/aclc.png') }}" alt="ACLC Icon"
+                class="logo ms-1 mt-3 me-2 mb-1">
+        <span class="mt-3">TechDesk</span>
     </a>
 
     <hr class="my-2">
 
     <ul class="nav nav-pills flex-column justify-content-center mx-1">
         <li class="nav-item">
-            <a href="#" class="btn btn-secondary text-black form-control" data-bs-toggle="modal"
+            <button class="btn btn-secondary text-black form-control" data-bs-toggle="modal"
                 data-bs-target="#composeModal">
                 <i class="bi bi-pen"></i>
-                Compose ticket
-            </a>
+                Compose Ticket
+            </button>
         </li>
 
         <hr class="my-2">
 
         <li class="nav-item">
-            <a href="#" class="nav-link items" aria-current="inbox">
+            <a href="{{ url_for('inbox') }}" class="nav-link items" aria-current="inbox">
                 <i class="bi bi-inbox-fill me-2"></i>
                 Inbox
             </a>
         </li>
 
-        <ul class="nav nav-pills list-group-item ms-3">
+        <!-- <ul class="nav nav-pills list-group-item ms-3">
             <li class="nav-item">
                 <a href="#" class="nav-link items" aria-current="sent">
                     <i class="bi bi-send-check-fill me-2"></i>
@@ -39,11 +41,17 @@
                     Archive
                 </a>
             </li>
-        </ul>
+        </ul> -->
+
+        <div class="nav nav-pills dropup dropup-center position-absolute bottom-0">
+            <button class="nav-link mx-1 mb-1 dropdown-toggle link-dark" data-bs-toggle="dropdown">
+                <img src="{{ url_for('static', filename='images/placeholder.png') }}" alt="Profile" class="profile me-1">
+                <span class="profile_name">User</span>
+            </button>
+            <ul class="dropdown-menu">
+                <!-- <li><a href="#" class="dropdown-item">Settings</a></li> -->
+                <li><a href="#" class="dropdown-item">Logout</a></li>
+            </ul>
+        </div>
     </ul>
 </div>
-<script>
-    $(document).ready(function () {
-
-    });
-</script>

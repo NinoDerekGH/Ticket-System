@@ -1,3 +1,5 @@
+{% extends "auth/forms.html" %}
+
 {% block title %}Register Form{% endblock %}
 
 {% block form %}
@@ -8,29 +10,6 @@
 
             <div class="mb-4 border-bottom border-dark-subtle">
                 <h3>Create Account</h3>
-            </div>
-
-            <!-- Full Name -->
-            <div class="row mb-3">
-                <div class="col">
-                    <div class="row">
-                        <div class="col">
-                            <label for="fname" class="form-label">First Name<sup class="text-danger">*</sup></label>
-                            <input type="text" class="form-control" id="fname">
-                        </div>
-                        <div id="fname-error" class="text-danger"></div>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="row">
-                        <div class="col">
-                            <label for="lname" class="form-label">Last Name<sup class="text-danger">*</sup></label>
-                            <input type="text" class="form-control" id="lname">
-                        </div>
-                        <div id="lname-error" class="text-danger"></div>
-                    </div>
-                </div>
             </div>
 
             <!-- Username -->
@@ -47,8 +26,13 @@
             </div>
             <div id="password-error" class="text-danger mb-3"></div>
 
+            <!-- Roles -->
+            <div class="mb-1">
+                <label for="roles" class="form-label">Select Role<sup class="text-danger">*</sup></label>
+                {{ form.role(class='form-select') }}
+            </div>
 
-            {{ form.role }}
+
             <!-- T.A.C -->
             <div class="mb-4 form-check">
                 <input type="checkbox" class="form-check-input" id="tac">

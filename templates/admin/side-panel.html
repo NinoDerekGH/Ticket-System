@@ -11,13 +11,13 @@
 
     <ul class="nav nav-pills flex-column justify-content-center mx-1">
         <li class="nav-item">
-            <a href="#" class="nav-link items" aria-current="tickets">
+            <a href="{{ url_for('tickets') }}" class="nav-link items" aria-current="tickets">
                 <i class="bi bi-ticket-detailed me-2"></i>
                 Tickets
             </a>
         </li>
 
-        <ul class="nav nav-pills list-group-item ms-3">
+        <!-- <ul class="nav nav-pills list-group-item ms-3">
             <li class="nav-item">
                 <a href="#" class="nav-link items" aria-current="unassigned">
                     <i class="bi bi-person-x-fill me-2"></i>
@@ -52,13 +52,13 @@
                     Archive
                 </a>
             </li>
-        </ul>
+        </ul> -->
 
         <hr class="my-2">
 
         <li class="nav-item">
-            <a href="#" class="nav-link items" aria-current="agents">
-                <i class="fa-solid fa-users me-2""></i>
+            <a href="{{ url_for('agents') }}" class="nav-link items" aria-current="agents">
+                <i class="fa-solid fa-users me-2"></i>
                 Agents
             </a>
         </li>
@@ -70,7 +70,7 @@
             <span class="profile_name">Admin</span>
         </button>
         <ul class="dropdown-menu">
-            <li><a href="#" class="dropdown-item">Settings</a></li>
+            <!-- <li><a href="#" class="dropdown-item">Settings</a></li> -->
             <li><a href="#" class="dropdown-item">Logout</a></li>
         </ul>
     </div>

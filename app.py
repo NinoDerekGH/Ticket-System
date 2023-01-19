@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, make_response, redirect, url_for
 from flask_login import UserMixin, LoginManager, current_user, login_user, logout_user, login_required
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField, SelectField
 from wtforms.validators import DataRequired, Email, EqualTo, Length
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -49,7 +49,8 @@ class RegistrationForm(FlaskForm):
         DataRequired(),
         EqualTo('confirm', message="Password must match")
     ])
-    role = StringField('Role', validators=[DataRequired(), Length(1, 16)])
+    role = SelectField(u'Role', choices=[('admin', 'Admin'), ('user', 'User')])
+    # role = StringField('Role', validators=[DataRequired(), Length(1, 16)])
     confirm = PasswordField('Confirm Password')
     submit = SubmitField('Register')
 
@@ -80,7 +81,7 @@ def register():
     return render_template('auth/registration.html', form=form)
 
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
         form = LoginForm()
@@ -93,9 +94,9 @@ def login():
         if bcrypt.check_password_hash(user.hashed_password, password):
             login_user(user)
             if user.role == 'admin':
-                return render_template('admin/tickets.html')
+                return render_template('/admin/tickets.html')
             else:
-                return render_template('user/user.html')
+                return render_template('/user/user.html')
         else:
             return 'Invalid email or password, please try again.'
     return render_template('admin/agents.html')
@@ -112,7 +113,7 @@ def logout():
 
 @app.route('/user/getdata')
 def getdata():
-    connect = mysql.connect()
+    connect = db.connect()
     cursor = connect.cursor()
 
     sql = "SELECT * FROM tickets"
@@ -132,7 +133,7 @@ def getdata():
 def exists(sql, value):
     exist = False
     try: 
-        connect = mysql.connect()
+        connect = db.connect()
         cursor =  connect.cursor()
         cursor.execute(sql, value)
         
@@ -153,7 +154,7 @@ def exists(sql, value):
 def viewed():
     try:
         id = request.form['id']
-        connect = mysql.connect()
+        connect = db.connect()
         cursor = connect.cursor() 
 
         if exists("SELECT * FROM ticket_status WHERE ticket_id = %s", id) == False:
@@ -174,7 +175,7 @@ def update():
         id = request.form['id']
         archived = request.form['archive']
 
-        connect = mysql.connect()
+        connect = db.connect()
         cursor = connect.cursor()
 
         sql = 'UPDATE tickets SET archived = %s WHERE id = %s;'
@@ -209,7 +210,7 @@ def sendticket():
         content = request.form['content']
 
         # Oppen Connection for ticketing_db
-        connect = mysql.connect()
+        connect = db.connect()
         cursor = connect.cursor()
 
         sql = 'INSERT INTO tickets (subject, content, department_id, created_at) VALUES (%s, %s,%s, %s);'
@@ -227,42 +228,20 @@ def sendticket():
         print(err)
     return ""
 
-# ------- Admin Routes ------- #
 
+# ------- Sidebar Routes ------- #
 
-@ app.route('/admin')
-def admin():
-    return render_template('admin/index.html')
-
-
-@ app.route('/unassigned')
-def unassigned():
-    return render_template('admin/unassigned.html')
-
-
-@ app.route('/pending')
-def pending():
-    return render_template('admin/pending.html')
-
-
-@ app.route('/onhold')
-def onhold():
-    return render_template('admin/onhold.html')
-
-
-@ app.route('/summary')
-def summary():
-    return render_template('admin/summary.html')
-
-
-@ app.route('/archive')
-def archive():
-    return render_template('admin/archive.html')
-
+@ app.route('/tickets')
+def tickets():
+    return render_template('admin/tickets.html')
 
 @ app.route('/agents')
 def agents():
     return render_template('admin/agents.html')
+
+@ app.route('/inbox')
+def inbox():
+    return render_template('user/user.html')
 
 
 if __name__ == '__main__':
