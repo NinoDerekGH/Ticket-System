@@ -2,13 +2,13 @@
 
 {% block title %}Admin Dashboard{% endblock %}
 
-{% block agents %}
+{% block dept %}
 
 <!-- Header -->
 <section class="agent_header position-fixed top-0 border-bottom">
   <span class="row my-3 mx-4">
-    Agents
-    <i class="bi bi-person-vcard-fill col ps-2"></i>
+    Departments
+    <i class="bi bi-card-list col ps-2"></i>
   </span>
 </section>
 
@@ -16,7 +16,7 @@
 <div class="dept card position-fixed">
   <div class="card-body align-items-center text-center">
     <button class="add_dept btn" type="button" data-bs-toggle="modal" data-bs-target="#create_dept">
-      Add Agent
+      Add Department
     </button>
   </div>
 </div>
@@ -26,22 +26,26 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Add an Agent</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Add an Department</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <form method="" action="" class="row">
           <div class="col-6">
-            <label for="name" class="form-label">Agent Name</label>
+            <label for="name" class="form-label">Department Name</label>
             <input class="form-control" type="text" name="name">
           </div>
           <div class="col-6">
-            <label for="uname" class="form-label">Agent Username</label>
+            <label for="uname" class="form-label">Username</label>
             <input class="form-control" type="text" name="uname">
           </div>
           <div class="col-12 mt-3">
             <label for="pwd" class="form-label">Password</label>
             <input class="form-control" type="password" name="pwd">
+          </div>
+          <div class="col-12 mt-3">
+            <label for="floatingTextarea" class="form-label">Description</label>
+            <textarea class="form-control" id="floatingTextarea"></textarea>
           </div>
         </form>
       </div>

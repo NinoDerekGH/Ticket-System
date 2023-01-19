@@ -267,6 +267,10 @@ def archive():
 def agents():
     return render_template('admin/agents.html')
 
+@ app.route('/departments')
+def departments():
+    return render_template('admin/departments.html')
+
 @ app.route('/inbox')
 def inbox():
     return render_template('user/user.html')
