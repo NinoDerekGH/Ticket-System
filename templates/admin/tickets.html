@@ -136,6 +136,12 @@
             + timestamp.getDate() + ", " + timestamp.getFullYear();
             const formatTime = timestamp.getHours() + ":" + timestamp.getMinutes() +":" + timestamp.getSeconds();
             // !-- dateformating
+            var priority ;
+                if (element.priority == 1){
+                    priority = '<p class="bg-secondary form-control text-white text-center">Normal</p>';
+                }else if (element.priority == 2){
+                    priority = '<p class="bg-warning form-control text-white text-center">High</p>';
+                }else{ priority = '<p class="bg-danger form-control text-white text-center">Ciritical</p>';}
             // limit String formats
             var limitedContent = element.content.length > 50 ? element.content.substring(0,60) + ' . . .': element.content;
             if (element.archived != 1){
@@ -151,12 +157,12 @@
                             
                             ${element.subject}
                         </td>
-                        <td class="col-6 text-secondary" data-bs-toggle="modal" data-bs-target="#rowModal${element.id}" id="${element.id}">
+                        <td class="col-5 text-secondary" data-bs-toggle="modal" data-bs-target="#rowModal${element.id}" id="${element.id}">
                             ${limitedContent}
                         </td>
                        
-                        <td class="text-center col-2 text-muted">${formatedDate}<br>${formatTime}</td>
-                        <td class="col-1"></td>
+                        <td class="text-center col-2 text-muted " style="font-size:16px;">${formatedDate}<br>${formatTime}</td>
+                        <td class="col-2">${priority}</td>
                     </tr>
                 `)
 

@@ -116,6 +116,12 @@
                     + timestamp.getDate() + ", " + timestamp.getFullYear();
                 const formatTime = timestamp.getHours() + ":" + timestamp.getMinutes() + ":" + timestamp.getSeconds();
                 // !-- dateformating
+                var priority ;
+                if (element.priority == 1){
+                    priority = '<p class="btn-secondary form-control">Normal</p>';
+                }else if (element.priority == 2){
+                    priority = '<p class="btn-warning form-control">High</p>';
+                }else{ priority = '<p class="btn-danger form-control">Ciritical</p>';}
                 // limit String formats
                 var limitedContent = element.content.length > 50 ? element.content.substring(0, 60) + ' . . .' : element.content;
                 if (element.department_id == user) {

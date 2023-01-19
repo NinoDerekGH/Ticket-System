@@ -132,10 +132,8 @@ def getdata():
     for res in results:
         
         json_res[res.id] = {'id' : res.id, 'subject' : res.subject, 'content' : res.content,
-         'department_id' : res.department_id, 'created_at' : res.created_at }
+         'department_id' : res.department_id, 'created_at' : res.created_at, 'priority': res.priority }
     return json_res
-
-
 def exists(sql, value):
     exist = False
     try: 
