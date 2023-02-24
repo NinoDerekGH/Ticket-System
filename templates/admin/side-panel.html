@@ -72,7 +72,7 @@
     <div class="nav nav-pills dropup dropup-center position-absolute bottom-0">
         <button class="nav-link mx-1 mb-1 dropdown-toggle link-dark" data-bs-toggle="dropdown">
             <img src="{{ url_for('static', filename='images/placeholder.png') }}" alt="Profile" class="profile me-1">
-            <span class="profile_name">Admin</span>
+            <span class="profile_name">{{ current_user.name }}</span>
         </button>
         <ul class="dropdown-menu">
             <!-- <li><a href="#" class="dropdown-item">Settings</a></li> -->

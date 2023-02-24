@@ -107,7 +107,7 @@ def register_user():
     return make_response({'success': 'Sent Successfully'}, 200)
         
 
-@app.route('/login', methods=['POST'])
+@app.route('/login', methods=['POST', 'GET'])
 def login():
     
     if request.method == 'GET':
@@ -118,8 +118,8 @@ def login():
     password = request.form['password']
     user = User.query.filter_by(username=username).first()
 
-    if not user:
-        if bcrypt.check_password_hash(user.hashed_password, _password):
+    if user:
+        if bcrypt.check_password_hash(user.hashed_password, password):
             login_user(user)
             if user.role == 'admin':
                 print(password)

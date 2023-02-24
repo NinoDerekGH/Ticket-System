@@ -33,22 +33,50 @@
         <form method="" action="" class="row">
           <div class="col-6">
             <label for="name" class="form-label">Agent Name</label>
-            <input class="form-control" type="text" name="name">
+            <input class="form-control" type="text" id="name" name="name">
           </div>
           <div class="col-6">
             <label for="uname" class="form-label">Agent Username</label>
-            <input class="form-control" type="text" name="uname">
+            <input class="form-control" type="text" id="username" name="uname">
           </div>
           <div class="col-12 mt-3">
             <label for="pwd" class="form-label">Password</label>
-            <input class="form-control" type="password" name="pwd">
+            <input class="form-control" type="password" id="password" name="pwd">
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Add</button>
+        <button type="button" class="btn btn-primary" id="submit">Add</button>
       </div>
     </div>
   </div>
 </div>
+{% endblock %}
+
+{% block jsfunction %}  
+
+<script>
+  $(document).ready(function(){
+    $.get('http://' + document.domain + ':' + location.port + '//getuser', function(data, status){
+      for(var key in data){
+        const element = data[key];
+        
+      }
+    });
+
+    $('#submit').click(function(){
+      $.post('http://' + document.domain + ':' + location.port + '/registration/post',{
+        'name': $('#name').val(),
+        'username': $('#username').val(),
+        'password': $('#password').val(),
+        'role': 'agent'
+      },function(data,status){
+          console.log(data);
+          location.reload();
+      });
+    });
+  });
+</script>
+
+
 {% endblock %}
